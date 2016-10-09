@@ -22,7 +22,7 @@ var ElementNode = Node(1, "NavBar", (state: "active"), [TextNode]);
 // an EmptyNode
 var EmptyNode = Node(0, "", (), []);
 
-function Diff (newNode, oldNode) {
+function reconciler (newNode, oldNode) {
 	// remove
 	if (newNode.nodeType === 0) {
 		return 1;
@@ -74,7 +74,7 @@ function Diff (newNode, oldNode) {
 			for (var i = 0; i < newLength || i < oldLength; i = i + 1) {
 			    var newChild = newNode.children[i] || Node(0, '', (), []);
 			    var oldChild = oldNode.children[i] || Node(0, '', (), []);
-			    var action   = Diff(newChild, oldChild);
+			    var action   = reconciler(newChild, oldChild);
 
 			    if (action !== 0) {
 			    	var index = i - deleteCount;
@@ -83,25 +83,25 @@ function Diff (newNode, oldNode) {
 			    		// remove operation
 			    		case 1: {
 			    			removeChild(oldNode, index);
-			    			oldNode.children.splice(index, 1)
-			    			deleteCount = deleteCount + 1
+			    			oldNode.children.splice(index, 1);
+			    			deleteCount = deleteCount + 1;
 			    		}
 			    		// add operation
 			    		case 2: {
-			    			addNode(oldNode, newChild, index)
-			    			oldNode.children.splice(index, 0, newChild)
-			    			deleteCount = deleteCount - 1
+			    			addNode(oldNode, newChild, index);
+			    			oldNode.children.splice(index, 0, newChild);
+			    			deleteCount = deleteCount - 1;
 			    		}
 			    		// text operation
 			    		case 3: {
-			    			updateText(newChild, oldChild)
-			    			oldChild.children[0] = newChild.children[0]
+			    			updateText(newChild, oldChild);
+			    			oldChild.children[0] = newChild.children[0];
 			    		}
 			    		// replace operation
 			    		case 4: {
 			    			// replace dom node
-			    			replaceChild(newChild, oldChild)
-			    			oldNode.children[index] = newChild
+			    			replaceChild(newChild, oldChild);
+			    			oldNode.children[index] = newChild;
 			    		}
 			    		// key operation
 			    		case 5: {

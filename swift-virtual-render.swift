@@ -16,7 +16,7 @@ var ElementNode = Node(1, "NavBar", (state: "active"), [TextNode])
 // an EmptyNode
 var EmptyNode = Node(0, "", (), [])
 
-func Diff (newNode: Node, oldNode: Node) -> Int {
+func reconciler (newNode: Node, oldNode: Node) -> Int {
 	// remove
 	if newNode.nodeType == 0 {
 		return 1
@@ -68,7 +68,7 @@ func Diff (newNode: Node, oldNode: Node) -> Int {
 			for var i:Int = 0; i < newLength || i < oldLength; i = i + 1 {
 			    var newChild: Node = newNode.children[i] || Node(0, '', (), [])
 			    var oldChild: Node = oldNode.children[i] || Node(0, '', (), [])
-			    var action: Int    = Diff(newChild, oldChild)
+			    var action: Int    = reconciler(newChild, oldChild)
 
 			    if action != 0 {
 			    	var index:Int = i - deleteCount;
