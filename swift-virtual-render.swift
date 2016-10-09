@@ -2,17 +2,21 @@
  * Swift implementation
  */
 
-struct Node {
+struct VNode {
 	let nodeType: Int // immutable
 	let type: Any     // immutable, String or Function
 	var props: ()     // tuple
 	var children: [Any]
 }
 
+func Node (nodeType: Int, type: Any, props: (), children: [VNode]) -> VNode {
+	return VNode(nodeType: nodeType, type: type, props: props, children: children);
+}
+
 // an EmptyNode
 var EmptyNode = Node(0, "", (), [])
 
-func reconciler (newNode: Node, oldNode: Node) -> Int {
+func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 	// remove
 	if newNode.nodeType == 0 {
 		return 1
@@ -39,7 +43,7 @@ func reconciler (newNode: Node, oldNode: Node) -> Int {
 	// recursive
 	else {
 		// extractNode will handle when newNode.type is a component constructor instead of a string
-		var currentNode: Node = extractNode(newNode)
+		var currentNode: VNode = extractNode(newNode)
 
 		// identical
 		if currentNode == oldNode {
@@ -65,8 +69,8 @@ func reconciler (newNode: Node, oldNode: Node) -> Int {
 			var deleteCount:Int = 0
 
 			for var i:Int = 0; i < newLength || i < oldLength; i = i + 1 {
-			    var newChild: Node = currentNode.children[i] || EmptyNode
-			    var oldChild: Node = oldNode.children[i] || EmptyNode
+			    var newChild: VNode = currentNode.children[i] || EmptyNode
+			    var oldChild: VNode = oldNode.children[i] || EmptyNode
 			    var action: Int    = reconciler(newChild, oldChild)
 
 			    if action != 0 {
