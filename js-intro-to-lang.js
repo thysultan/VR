@@ -86,16 +86,11 @@ if ((1 > 2 || 1 > 4) && true == true) {
  *   -    `subtraction`
  *   *    `multiplication`
  *   /    `division`
- *   !=   `not equal`
- *   ==   `equal`
- *   ===  `identical to`
- *   !==  `not identical to`
+ *   ==  `identical to`
+ *   !=  `not identical to`
+ *   !==   `not equal`
+ *   ===   `equal`
  *
- *   note that “identical to” (represented by three equals signs, or ===) 
- *   does not mean the same thing as “equal to” (represented by two equals signs, or ==):
- *   “Identical to” means that two constants or variables of class type 
- *   refer to exactly the same class instance.
- *   “equal to” means that two instances are considered “equal” or “equivalent” in value
  * 
  */
 
