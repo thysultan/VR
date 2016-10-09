@@ -176,6 +176,7 @@ function diffOldProps (newProps, oldProps, oldName, NS, diff) {
 	}
 }
 
+
 // a text node
 var textNode = Node(3, "Text", {}, ["Hello World"])
 // an element node NavBar with one single child TextNode
