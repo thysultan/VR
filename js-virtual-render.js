@@ -144,12 +144,13 @@ function patchProps (newNode, oldNode) {
 // diff props
 function diffProps (newProps, oldProps) {
 	var diff = [];
+	var NS   = oldProps.xmlns;
 
 	for (var newName in newProps) { 
-		diff[diff.length] = diffNewProps(newProps, oldProps, newName, NS, diff); 
+		diff[diff.length] = diffNewProps(newProps, oldProps, newName, oldValue, NS, diff); 
 	}
 	for (var oldName in oldProps) { 
-		diff[diff.length] = diffOldProps(newProps, oldName, oldValue, NS, diff); 
+		diff[diff.length] = diffOldProps(newProps, oldProps, oldName, oldValue, NS, diff);
 	}
 
 	return diff;

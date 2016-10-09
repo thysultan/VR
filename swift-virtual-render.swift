@@ -138,36 +138,37 @@ func patchProps (newNode: VNode, oldNode: VNode) {
 // diff props
 func diffProps (newProps: [String: String], oldProps: [String: String]) -> [Any] {
 	var diff: [Any] = []
+	var NS: String = oldProps.xmlns
 
 	for (newName, newValue) in newProps { 
-	    diff += diffNewProps(newProps, oldProps, newName, newValue)
+	    diff += diffNewProps(newProps, oldProps, newName, newValue, NS)
 	}
 
 	for (oldName, oldValue) in oldProps {
-	    diff += diffNewProps(newProps, oldProps, oldName, oldValue)
+	    diff += diffNewProps(newProps, oldProps, oldName, oldValue, NS)
 	}
 
 	return diff
 }
 
 // diff new props
-func diffNewProps (newProps: [String: String], oldProps: [String: String], newName: String, newValue: String) -> [Any] {
+func diffNewProps (newProps: [String: String], oldProps: [String: String], newName: String, newValue: String, NS: String) -> [Any] {
 	var oldValue: String = oldProps[newName]
 	var diff: [Any] = []
 
 	if (newValue != nil && oldValue !== newValue) {
-		diff += ["setAttribute", newName, newValue]
+		diff += ["setAttribute", newName, newValue, NS]
 	}
 
 	return diff
 }
 
 // diff old props
-func diffOldProps (newProps: [String: String], oldProps: [String: String], oldName: String, oldValue: String) -> [Any] {
+func diffOldProps (newProps: [String: String], oldProps: [String: String], oldName: String, oldValue: String, NS: String) -> [Any] {
 	var diff: [Any] = []
 
 	if (newProps[oldName] == nil || newProps[oldName] === nil) {
-		diff += ["removeAttribute", newName, newValue]
+		diff += ["removeAttribute", newName, newValue, NS]
 	}
 
 	return diff
