@@ -63,7 +63,7 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 		if newLength == 0 {
 			// but only if old children is not already cleared
 			if oldLength != 0 {
-				// clearChildren calls native api's
+				// clearChildren calls native api(s)
 				clearChildren(oldNode)
 				oldNode.children = currentNode.children
 			}
@@ -81,27 +81,27 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			    	switch action {
 			    		// remove operation
 			    		case 1: {
-			    			// removeNode calls native api's
+			    			// removeNode calls native api(s)
 			    			removeNode(oldNode, index);
 			    			oldNode.children.removeAtIndex(index)
 			    			deleteCount = deleteCount + 1
 			    		}
 			    		// add operation
 			    		case 2: {
-			    			// addNode calls native api's
+			    			// addNode calls native api(s)
 			    			addNode(oldNode, newChild, index)
 			    			oldNode.children.insert(newChild, atIndex: index)
 			    			deleteCount = deleteCount - 1
 			    		}
 			    		// text operation
 			    		case 3: {
-			    			// updateText calls native api's
+			    			// updateText calls native api(s)
 			    			updateText(newChild, oldChild)
 			    			oldChild.children[0] = newChild.children[0]
 			    		}
 			    		// replace operation
 			    		case 4: {
-			    			// replaceNode calls native api's
+			    			// replaceNode calls native api(s)
 			    			replaceNode(newChild, oldChild)
 			    			oldNode.children[index] = newChild
 			    		}
@@ -127,7 +127,7 @@ func patchProps (newNode: VNode, oldNode: VNode) {
 		for var i = 0; i < length; i = i + 1 {
 			var prop = diff[i]
 
-			// patchProp calls native api's
+			// patchProp calls native api(s)
 			patchProp(prop[0], prop[1], prop[2])
 		}
 

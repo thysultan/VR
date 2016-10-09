@@ -35,6 +35,9 @@ var tpl: Tuple        = (name: "Sultan", age: 25)
 
 // anything created with `var` is mutable, anything created with `let` is immutable
 
+var foo = 1 // mutable
+let bar = 1 // immutable
+
 
 /**
  * ---------------------------------------------------------------------------------

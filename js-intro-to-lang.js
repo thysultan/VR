@@ -32,6 +32,10 @@ var fn                = function foo () -> {}
 
 // anything created with `var` or `let` is mutable, anything created with `const` is immutable
 
+var foo = 1 // mutable
+let bar = 1 // mutable
+const faz = 1 // immutable
+
 
 /**
  * ---------------------------------------------------------------------------------
@@ -310,6 +314,7 @@ class SurveyQuestion {
         print(text)
     }
 }
+
 let cheeseQuestion = new SurveyQuestion(text: "Do you like cheese?")
 cheeseQuestion.ask()
 // prints "Do you like cheese?"

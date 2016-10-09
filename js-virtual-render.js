@@ -64,7 +64,7 @@ function reconciler (newNode, oldNode) {
 		if (newLength === 0) {
 			// but only if old children is not already cleared
 			if (oldLength !== 0) {
-				// clearChildren calls native api's
+				// clearChildren calls native api(s)
 				clearChildren(oldNode);
 				oldNode.children = currentNode.children;
 			}
@@ -82,7 +82,7 @@ function reconciler (newNode, oldNode) {
 			    	switch (action) {
 			    		// remove operation
 			    		case 1: {
-			    			// removeNode calls native api's
+			    			// removeNode calls native api(s)
 			    			removeNode(oldNode, index);
 			    			oldNode.children.splice(index, 1);
 			    			deleteCount = deleteCount + 1;
@@ -90,7 +90,7 @@ function reconciler (newNode, oldNode) {
 			    		}
 			    		// add operation
 			    		case 2: {
-			    			// addNode calls native api's
+			    			// addNode calls native api(s)
 			    			addNode(oldNode, newChild, index);
 			    			oldNode.children.splice(index, 0, newChild);
 			    			deleteCount = deleteCount - 1;
@@ -98,14 +98,14 @@ function reconciler (newNode, oldNode) {
 			    		}
 			    		// text operation
 			    		case 3: {
-			    			// updateText calls native api's
+			    			// updateText calls native api(s)
 			    			updateText(newChild, oldChild);
 			    			oldChild.children[0] = newChild.children[0];
 			    			break;
 			    		}
 			    		// replace operation
 			    		case 4: {
-			    			// replaceNode calls native api's
+			    			// replaceNode calls native api(s)
 			    			replaceNode(newChild, oldChild);
 			    			oldNode.children[index] = newChild;
 			    			break;
@@ -133,7 +133,7 @@ function patchProps (newNode, oldNode) {
 		for (var i = 0; i < length; i = i + 1) {
 			var prop = diff[i];
 
-			// patchProp calls native api's
+			// patchProp calls native api(s)
 			patchProp(prop[0], prop[1], prop[2], prop[3])
 		}
 
