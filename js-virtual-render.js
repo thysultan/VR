@@ -15,10 +15,6 @@ function Node (nodeType, type, props, children) {
 	return new VNode(nodeType, type, props, children);
 }
 
-// a TextNode
-var TextNode = Node(3, "Text", (), ["Hello World"]);
-// an ElementNode NavBar with one TextNode child
-var ElementNode = Node(1, "NavBar", (state: "active"), [TextNode]);
 // an EmptyNode
 var EmptyNode = Node(0, "", (), []);
 
@@ -48,17 +44,20 @@ function reconciler (newNode, oldNode) {
 	}
 	// recursive
 	else {
+		// extract will handle when newNode.type is a component constructor instead of a string
+		var currentNode = extractNode(newNode)
+
 		// identical
-		if (newNode === oldNode) {
+		if (currentNode === oldNode) {
 			return 0;
 		}
 
-		// patch props, non TextNodes
+		// if not TextNode patch props
 		if (oldNode.nodeType === 1) { 
-			patchProps(newNode, oldNode);
+			patchProps(currentNode, oldNode);
 		}
 
-		var newLength = newNode.children.length;
+		var newLength = currentNode.children.length;
 		var oldLength = oldNode.children.length;
 
 		// remove all children
@@ -66,14 +65,14 @@ function reconciler (newNode, oldNode) {
 			// but only if old children is not already cleared
 			if (oldLength !== 0) {
 				clearChildren(oldNode);
-				oldNode.children = newNode.children;
+				oldNode.children = currentNode.children;
 			}
 		} else {
 			var deleteCount = 0;
 
 			for (var i = 0; i < newLength || i < oldLength; i = i + 1) {
-			    var newChild = newNode.children[i] || Node(0, '', (), []);
-			    var oldChild = oldNode.children[i] || Node(0, '', (), []);
+			    var newChild = currentNode.children[i] || EmptyNode;
+			    var oldChild = oldNode.children[i] || EmptyNode;
 			    var action   = reconciler(newChild, oldChild);
 
 			    if (action !== 0) {
@@ -115,3 +114,10 @@ function reconciler (newNode, oldNode) {
 
 	return 0;
 }
+
+// a TextNode
+var TextNode = Node(3, "Text", (), ["Hello World"])
+// an ElementNode NavBar with one TextNode child
+var ElementNode = Node(1, "NavBar", (state: "active"), [TextNode])
+
+reconciler(ElementNode, ElementNode)
