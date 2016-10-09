@@ -6,10 +6,10 @@ struct VNode {
 	let nodeType: Int // immutable
 	let type: Any     // immutable, String or Function
 	var props: [String: Any] // dictionary
-	var children: [Any]
+	var children: [VNode]
 }
 
-func Node (nodeType: Int, type: Any, props: [String: String], children: [VNode]) -> VNode {
+func Node (nodeType: Int, type: Any, props: [String: Any], children: [VNode]) -> VNode {
 	return VNode(nodeType: nodeType, type: type, props: props, children: children);
 }
 
@@ -46,18 +46,21 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 		// extractNode will handle when newNode.type is a component constructor instead of a string
 		var currentNode: VNode = extractNode(newNode)
 
-		// identical
+		// identical, exit early
 		if currentNode == oldNode {
 			return 0
 		}
 
-		// if not TextNode patch props
+		// if not text patch props
 		if oldNode.nodeType == 1 {
 			patchProps(currentNode, oldNode)
 		}
 
-		var newLength: Int = currentNode.children.count
-		var oldLength: Int = oldNode.children.count
+		var currentChildren: [VNode] = currentNode.children
+		var oldChildren: [Vnode] = oldName.children
+
+		var newLength: Int = currentChildren.count
+		var oldLength: Int = currentChildren.count
 
 		// remove all children
 		if newLength == 0 {
@@ -65,15 +68,15 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			if oldLength != 0 {
 				// clearChildren calls native api(s)
 				clearChildren(oldNode)
-				oldNode.children = currentNode.children
+				oldNode.children = currentChildren
 			}
 		} else {
 			var deleteCount:Int = 0
 
 			for var i:Int = 0; i < newLength || i < oldLength; i = i + 1 {
-			    var newChild: VNode = currentNode.children[i] || EmptyNode
-			    var oldChild: VNode = oldNode.children[i] || EmptyNode
-			    var action: Int = reconciler(newChild, oldChild)
+			    var newChild: VNode = currentChildren[i] || EmptyNode
+			    var oldChild: VNode = oldChildren[i] || EmptyNode
+			    var action: Int     = reconciler(newChild, oldChild)
 
 			    if action != 0 {
 			    	var index:Int = i - deleteCount;
@@ -83,14 +86,14 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			    		case 1: {
 			    			// removeNode calls native api(s)
 			    			removeNode(oldNode, index);
-			    			oldNode.children.removeAtIndex(index)
+			    			oldchildren.removeAtIndex(index)
 			    			deleteCount = deleteCount + 1
 			    		}
 			    		// add operation
 			    		case 2: {
 			    			// addNode calls native api(s)
 			    			addNode(oldNode, newChild, index)
-			    			oldNode.children.insert(newChild, atIndex: index)
+			    			oldchildren.insert(newChild, atIndex: index)
 			    			deleteCount = deleteCount - 1
 			    		}
 			    		// text operation
@@ -103,7 +106,7 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			    		case 4: {
 			    			// replaceNode calls native api(s)
 			    			replaceNode(newChild, oldChild)
-			    			oldNode.children[index] = newChild
+			    			oldchildren[index] = newChild
 			    		}
 			    		// key operation
 			    		case 5: {
@@ -136,7 +139,7 @@ func patchProps (newNode: VNode, oldNode: VNode) {
 }
 
 // diff props
-func diffProps (newProps: [String: String], oldProps: [String: String]) -> [Any] {
+func diffProps (newProps: [String: Any], oldProps: [String: Any]) -> [Any] {
 	var diff: [Any] = []
 	var NS: String = oldProps.xmlns
 
@@ -152,7 +155,7 @@ func diffProps (newProps: [String: String], oldProps: [String: String]) -> [Any]
 }
 
 // diff new props
-func diffNewProps (newProps: [String: String], oldProps: [String: String], newName: String, newValue: String, NS: String) -> [Any] {
+func diffNewProps (newProps: [String: Any], oldProps: [String: Any], newName: String, newValue: String, NS: String) -> [Any] {
 	var oldValue: String = oldProps[newName]
 	var diff: [Any] = []
 
@@ -164,7 +167,7 @@ func diffNewProps (newProps: [String: String], oldProps: [String: String], newNa
 }
 
 // diff old props
-func diffOldProps (newProps: [String: String], oldProps: [String: String], oldName: String, oldValue: String, NS: String) -> [Any] {
+func diffOldProps (newProps: [String: Any], oldProps: [String: Any], oldName: String, oldValue: String, NS: String) -> [Any] {
 	var diff: [Any] = []
 
 	if newProps[oldName] == nil || newProps[oldName] === nil {
@@ -175,9 +178,9 @@ func diffOldProps (newProps: [String: String], oldProps: [String: String], oldNa
 }
 
 
-// a TextNode
+// a text node
 var TextNode = Node(3, "Text", [:], ["Hello World"])
-// an ElementNode NavBar with one TextNode child
+// an eleent node NavBar with one single child TextNode
 var ElementNode = Node(1, "NavBar", ["state": "active"], [TextNode])
 
 reconciler(ElementNode, ElementNode)
