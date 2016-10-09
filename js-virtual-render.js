@@ -2,7 +2,7 @@
  * Javascript implementation
  */
 
-class Element () {
+class VNode () {
 	constructor (nodeType, type, props, children) {
 		this.nodeType = nodeType;
 		this.type = type;
@@ -12,7 +12,7 @@ class Element () {
 }
 
 function Node (nodeType, type, props, children) {
-	return new Element(nodeType, type, props, children);
+	return new VNode(nodeType, type, props, children);
 }
 
 // a TextNode

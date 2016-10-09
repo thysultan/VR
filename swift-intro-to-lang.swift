@@ -3,7 +3,7 @@
  */
 
  
-// Int, Bool, String, Double, Any, Float, Void
+// Int, Bool, String, Double, Any, Float, Void, Array, () -> T
 
  
 /**
@@ -16,10 +16,12 @@ var integer: Int      = Int(double)
 var boolean: Bool     = true
 var double: Double    = 7.2 
 var double: Double    = Double(integer)
+var float: Fouble     = 7.2
 var string: String    = "String"
 var any:Any           = nil
 var intOpt:Int?       = 42 // Optional Int -> intOpt! to access value
 var fn: () -> Int     = func foo() -> Int {}
+var arr: [String]     = ["String 1", "String 2"]
 
 
 /**
@@ -30,7 +32,7 @@ var fn: () -> Int     = func foo() -> Int {}
  * ---------------------------------------------------------------------------------
  */
 
-// anything create with `var` is mutable, anything created with `let` is immutable
+// anything created with `var` is mutable, anything created with `let` is immutable
 
 
 /**
@@ -133,7 +135,7 @@ while i <= 10 {
 
 /**
  * for `value` in `range` {
- * 	`statements`
+ *     `statements`
  * }
  */
 
@@ -161,7 +163,7 @@ for i in 0..<10 {
 
 /**
  * for `initialization`; `condition`; `increment` {
- * 	`statements`
+ *     `statements`
  * }
  */
 
@@ -333,10 +335,10 @@ print(result)
  */
 
 // A dictionary is a container that stores multiple values of the same type. 
-// Each value is associated with a unique key, which acts as an identifier for 
+// each value is associated with a unique key, which acts as an identifier for 
 // that value within the dictionary
 
-// syntax([KeyType:ValueType]) i.e [key:value, key:value, ...]
+// syntax([KeyType: ValueType]) i.e [key:value, key:value, ...]
 
 var dictionary: [String: Int] = [
     "one" : 1,
@@ -491,7 +493,7 @@ range.isInRange(customer) // => true!
  */
 
 // classes and structures have a similar definition syntax. 
-// You introduce classes with the class keyword and structures with the struct keyword. 
+// you introduce classes with the class keyword and structures with the struct keyword. 
 // Both place their entire definition within a pair of braces:
 class SomeClass {
     // class definition goes here
@@ -501,9 +503,9 @@ struct SomeStructure {
 }
 
 // NOTE: Whenever you define a new class or structure, you effectively define a brand new Swift type. 
-// Give types UpperCamelCase names (such as SomeClass and SomeStructure here) 
+// give types UpperCamelCase names (such as SomeClass and SomeStructure here) 
 // to match the capitalization of standard Swift types (such as String, Int, and Bool). 
-// Conversely, always give properties and methods lowerCamelCase names 
+// conversely, always give properties and methods lowerCamelCase names 
 // (such as frameRate and incrementCount) to differentiate them from type names.
 
 struct Resolution {
@@ -535,7 +537,7 @@ class SurveyQuestion {
 }
 let cheeseQuestion = SurveyQuestion(text: "Do you like cheese?")
 cheeseQuestion.ask()
-// Prints "Do you like cheese?"
+// prints "Do you like cheese?"
 cheeseQuestion.response = "Yes, I do like cheese."
 
 // NOTE: you can assign a value to a constant property at any point during initialization, 
