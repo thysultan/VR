@@ -12,18 +12,18 @@ struct Node {
 // a TextNode
 var TextNode = Node(3, "Text", (), ["Hello World"])
 // an ElementNode NavBar with one TextNode child
-var ElementNode = Node(1, "NavBar", (className: "active"), [TextNode])
+var ElementNode = Node(1, "NavBar", (state: "active"), [TextNode])
 // an EmptyNode
 var EmptyNode = Node(0, "", (), [])
 
 func Diff (newNode: Node, oldNode: Node) -> Int {
 	// remove
-	if newNode.nodeType === 0 {
-		return 1;
+	if newNode.nodeType == 0 {
+		return 1
 	}
 	// add
-	if oldNode.nodeType === 0 {
-		return 2;
+	if oldNode.nodeType == 0 {
+		return 2
 	}
 	// text
 	if newNode.nodeType == 3 && oldNode.nodeType == 3 {
@@ -43,12 +43,12 @@ func Diff (newNode: Node, oldNode: Node) -> Int {
 	// recursive
 	else {
 		// identical
-		if newNode === oldNode {
+		if newNode == oldNode {
 			return 0
 		}
 
 		// patch props, non TextNodes
-		if oldNode.nodeType === 1 { 
+		if oldNode.nodeType == 1 { 
 			patchProps(newNode, oldNode)
 		}
 
@@ -56,9 +56,9 @@ func Diff (newNode: Node, oldNode: Node) -> Int {
 		var oldLength: Int = oldNode.children.count
 
 		// remove all children
-		if (newLength === 0) {
+		if newLength == 0 {
 			// but only if old children is not already cleared
-			if (oldLength !== 0) {
+			if oldLength != 0 {
 				clearChildren(oldNode)
 				oldNode.children = newNode.children
 			}
@@ -70,7 +70,7 @@ func Diff (newNode: Node, oldNode: Node) -> Int {
 			    var oldChild: Node = oldNode.children[i] || Node(0, '', (), [])
 			    var action: Int    = Diff(newChild, oldChild)
 
-			    if (action != 0) {
+			    if action != 0 {
 			    	var index:Int = i - deleteCount;
 
 			    	switch action {
@@ -107,5 +107,5 @@ func Diff (newNode: Node, oldNode: Node) -> Int {
 		}
 	}
 
-	return 0;
+	return 0
 }
