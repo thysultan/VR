@@ -254,7 +254,7 @@ var dictionary = {
 }
 var emptyDictionary = {}
 
-// simplest way to add a value to a dictionary:
+// simplest way to add a values to a dictionary:
 var stringsAsInts = {
     zero: 0,
     one: 1,
