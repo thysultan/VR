@@ -81,7 +81,7 @@ function reconciler (newNode, oldNode) {
 			    	switch (action) {
 			    		// remove operation
 			    		case 1: {
-			    			removeChild(oldNode, index);
+			    			removeNode(oldNode, index);
 			    			oldNode.children.splice(index, 1);
 			    			deleteCount = deleteCount + 1;
 			    		}
@@ -99,7 +99,7 @@ function reconciler (newNode, oldNode) {
 			    		// replace operation
 			    		case 4: {
 			    			// replace dom node
-			    			replaceChild(newChild, oldChild);
+			    			replaceNode(newChild, oldChild);
 			    			oldNode.children[index] = newChild;
 			    		}
 			    		// key operation

@@ -75,7 +75,7 @@ func reconciler (newNode: Node, oldNode: Node) -> Int {
 			    	switch action {
 			    		// remove operation
 			    		case 1: {
-			    			removeChild(oldNode, index);
+			    			removeNode(oldNode, index);
 			    			oldNode.children.removeAtIndex(index)
 			    			deleteCount = deleteCount + 1
 			    		}
@@ -93,7 +93,7 @@ func reconciler (newNode: Node, oldNode: Node) -> Int {
 			    		// replace operation
 			    		case 4: {
 			    			// replace dom node
-			    			replaceChild(newChild, oldChild)
+			    			replaceNode(newChild, oldChild)
 			    			oldNode.children[index] = newChild
 			    		}
 			    		// key operation
