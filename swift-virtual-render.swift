@@ -5,7 +5,7 @@
 struct Node {
 	let nodeType: Int // immutable
 	let type: Any     // immutable, String or Function
-	var props: ()
+	var props: ()     // tuple
 	var children: [Any]
 }
 
