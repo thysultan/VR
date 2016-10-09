@@ -6,7 +6,10 @@ React-Style virtual(diff and patch) rendering implementations in different progr
 which may serve as a good way to learn a new language from the point of view of another through comparing
 how the same thing is implemented in the language vs your language of choice. 
 
-*NOTE: Calls to native api's are prefixed with a comment `// ... calls native api(s)`.*
+**NOTE: Calls to native api's are prefixed with a comment `// ... calls native api(s)`.**
+
+The idea is that these functions will contain contain platform(DOM, iOS, Android, macOS, Windows) specific code
+that address the particular opertation in question.
 
 ### Current Implementations
 
