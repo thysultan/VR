@@ -4,7 +4,7 @@
 
 struct Node {
 	let nodeType: Int // immutable
-	let type: String  // immutable
+	let type: Any     // immutable, String or Function
 	var props: ()
 	var children: [Any]
 }

@@ -19,6 +19,7 @@ var double: Double    = Double(integer)
 var string: String    = "String"
 var any:Any           = nil
 var intOpt:Int?       = 42 // Optional Int -> intOpt! to access value
+var fn: () -> Int     = func foo() -> Int {}
 
 
 /**
@@ -295,7 +296,6 @@ func digits(var number: Int) {
 // you cannot pass a constant or a literal value, because they cannot be changed. 
 // you have to write an ampersand (&) in front of the variable name when calling the function. 
 // that will indicate that the variable can be modified by the function.
-
 func doubleANumber(inout number: Int) {
     number = number * 2
 }
@@ -304,7 +304,24 @@ var n = 10
 
 doubleANumber(&n)
 
-print(n) // 20
+print(n) // => 20
+
+// sometimes we want a method that receives any number of arguments. 
+// this is a variadic func. we use an ellipsis to indicate a variadic method
+// then we can use the argument as an array in the method body. 
+func sumStringLengths(values: String...) -> Int {
+    var sum: Int = 0
+
+    for value in values {
+		sum += value.characters.count
+    }
+
+    return sum
+}
+
+// Call the method with 2 arguments.
+let result = sumStringLengths("bird", "cat")
+print(result)
 
 
 /**
