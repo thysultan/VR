@@ -131,7 +131,7 @@ func patchProps (newNode: VNode, oldNode: VNode) {
 			var prop = diff[i]
 
 			// patchProp calls native api(s)
-			patchProp(prop[0], prop[1], prop[2])
+			patchProp(prop[0], prop[1], prop[2], prop[3])
 		}
 
 		oldNode.props = newNode.props
@@ -148,7 +148,7 @@ func diffProps (newProps: [String: Any], oldProps: [String: Any]) -> [Any] {
 	}
 
 	for (oldName, oldValue) in oldProps {
-	    diff += diffNewProps(newProps, oldProps, oldName, oldValue, NS)
+	    diff += diffoldProps(newProps, oldProps, oldName, oldValue, NS)
 	}
 
 	return diff
