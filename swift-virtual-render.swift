@@ -179,8 +179,9 @@ func diffOldProps (newProps: [String: Any], oldProps: [String: Any], oldName: St
 
 
 // a text node
-var TextNode = Node(3, "Text", [:], ["Hello World"])
+var textNode = Node(3, "Text", [:], ["Hello World"])
 // an element node NavBar with one single child TextNode
-var ElementNode = Node(1, "NavBar", ["state": "active"], [TextNode])
+var oldNode = Node(1, "NavBar", ["state": "active"], [textNode])
+var newNode = Node(1, "NavBar", ["state": "active"], [textNode])
 
-reconciler(ElementNode, ElementNode)
+reconciler(newNode, oldNode)
