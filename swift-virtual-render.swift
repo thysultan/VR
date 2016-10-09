@@ -1,5 +1,5 @@
 /**
- * Swift implementation of a simple react-like virtual diff algo
+ * Swift implementation
  */
 
 struct Node {
