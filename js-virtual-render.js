@@ -178,7 +178,7 @@ function diffOldProps (newProps, oldProps, oldName, NS, diff) {
 
 // a text node
 var TextNode = Node(3, "Text", {}, ["Hello World"])
-// an eleent node NavBar with one single child TextNode
+// an element node NavBar with one single child TextNode
 var ElementNode = Node(1, "NavBar", {state: "active"}, [TextNode])
 
 reconciler(ElementNode, ElementNode)
