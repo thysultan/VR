@@ -84,27 +84,32 @@ function reconciler (newNode, oldNode) {
 			    			removeNode(oldNode, index);
 			    			oldNode.children.splice(index, 1);
 			    			deleteCount = deleteCount + 1;
+			    			break;
 			    		}
 			    		// add operation
 			    		case 2: {
 			    			addNode(oldNode, newChild, index);
 			    			oldNode.children.splice(index, 0, newChild);
 			    			deleteCount = deleteCount - 1;
+			    			break;
 			    		}
 			    		// text operation
 			    		case 3: {
 			    			updateText(newChild, oldChild);
 			    			oldChild.children[0] = newChild.children[0];
+			    			break;
 			    		}
 			    		// replace operation
 			    		case 4: {
 			    			// replace dom node
 			    			replaceNode(newChild, oldChild);
 			    			oldNode.children[index] = newChild;
+			    			break;
 			    		}
 			    		// key operation
 			    		case 5: {
-
+			    			// code block
+			    			break;
 			    		}
 			    	}
 			    }
