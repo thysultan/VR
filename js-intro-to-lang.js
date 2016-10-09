@@ -157,7 +157,8 @@ for (var i = 10; i > 0; --i) {
  * ---------------------------------------------------------------------------------
  */
 
-
+// though arrays in javascript can hold any type of value arrays can act
+// as typed arrays post VM's optimization if they remain monomorphic
 var ints           = [1, 2, 3]
 var strs           = ["A", "B", "C"]
 var buls           = [true, false, true]
