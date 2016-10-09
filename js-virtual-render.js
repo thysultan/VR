@@ -45,7 +45,7 @@ function reconciler (newNode, oldNode) {
 	// recursive
 	else {
 		// extract will handle when newNode.type is a component constructor instead of a string
-		var currentNode = extractNode(newNode)
+		var currentNode = extractNode(newNode);
 
 		// identical, exit early
 		if (currentNode === oldNode) {
@@ -140,7 +140,7 @@ function patchProps (newNode, oldNode) {
 			patchProp(oldNode, prop[0], prop[1], prop[2], prop[3])
 		}
 
-		oldNode.props = newNode.props
+		oldNode.props = newNode.props;
 	}
 }
 
@@ -178,9 +178,9 @@ function diffOldProps (newProps, oldProps, oldName, NS, diff) {
 
 
 // a text node
-var textNode = Node(3, "Text", {}, ["Hello World"])
+var textNode = Node(3, "Text", {}, ["Hello World"]);
 // an element node NavBar with one single child TextNode
-var oldNode = Node(1, "NavBar", {state: "active"}, [TextNode])
-var newNode = Node(1, "NavBar", {state: "active"}, [TextNode])
+var oldNode = Node(1, "NavBar", {state: "active"}, [TextNode]);
+var newNode = Node(1, "NavBar", {state: "active"}, [TextNode]);
 
-reconciler(newNode, oldNode)
+reconciler(newNode, oldNode);
