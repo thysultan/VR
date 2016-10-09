@@ -140,7 +140,7 @@ func diffProps (newProps: [String: String], oldProps: [String: String]) -> [Any]
 	var diff: [Any] = []
 	var NS: String = oldProps.xmlns
 
-	for (newName, newValue) in newProps { 
+	for (newName, newValue) in newProps {
 	    diff += diffNewProps(newProps, oldProps, newName, newValue, NS)
 	}
 
@@ -156,7 +156,7 @@ func diffNewProps (newProps: [String: String], oldProps: [String: String], newNa
 	var oldValue: String = oldProps[newName]
 	var diff: [Any] = []
 
-	if (newValue != nil && oldValue !== newValue) {
+	if newValue != nil && oldValue !== newValue {
 		diff += ["setAttribute", newName, newValue, NS]
 	}
 
@@ -167,7 +167,7 @@ func diffNewProps (newProps: [String: String], oldProps: [String: String], newNa
 func diffOldProps (newProps: [String: String], oldProps: [String: String], oldName: String, oldValue: String, NS: String) -> [Any] {
 	var diff: [Any] = []
 
-	if (newProps[oldName] == nil || newProps[oldName] === nil) {
+	if newProps[oldName] == nil || newProps[oldName] === nil {
 		diff += ["removeAttribute", newName, newValue, NS]
 	}
 
