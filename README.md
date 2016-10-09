@@ -1,6 +1,6 @@
 # Virtual Rendering Implementations
 
-Implementations of React style virtual diff/patch rendering engines in different programming langauges.
+React-Style virtual(diff and patch) rendering Implementations in different programming Languages.
 
 ### Current Implementations
 
@@ -12,4 +12,4 @@ Implementations of React style virtual diff/patch rendering engines in different
 - Rust
 - GO
 
-Open to Pull Requests for other langauges, just include a `langName-intro-to-lang.ext` file
+Open to pull requests for other Languages. Just include a `langName-intro-to-lang.ext` file.
