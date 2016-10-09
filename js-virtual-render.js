@@ -16,7 +16,7 @@ function Node (nodeType, type, props, children) {
 }
 
 // an EmptyNode
-var EmptyNode = Node(0, "", (), []);
+var EmptyNode = Node(0, "", {}, []);
 
 function reconciler (newNode, oldNode) {
 	// remove
@@ -121,8 +121,8 @@ function reconciler (newNode, oldNode) {
 }
 
 // a TextNode
-var TextNode = Node(3, "Text", (), ["Hello World"])
+var TextNode = Node(3, "Text", {}, ["Hello World"])
 // an ElementNode NavBar with one TextNode child
-var ElementNode = Node(1, "NavBar", (state: "active"), [TextNode])
+var ElementNode = Node(1, "NavBar", {state: "active"}, [TextNode])
 
 reconciler(ElementNode, ElementNode)
