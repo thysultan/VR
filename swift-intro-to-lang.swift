@@ -38,6 +38,15 @@ var tpl: Tuple        = (name: "Sultan", age: 25)
 var foo: Int = 1 // mutable
 let bar: Int = 1 // immutable
 
+// Error! The type of a variable can't be changed
+foo = true
+
+var foo: Any = 1
+
+// Ok!
+foo = true
+
+
 
 /**
  * ---------------------------------------------------------------------------------
@@ -65,7 +74,7 @@ let bar: Int = 1 // immutable
 if (1 > 2 || 1 > 4) && true == true {
 	print("1 is greater than 2 or 4");
 } else {
-	print('1 is less than 2');
+	print("1 is less than 2");
 }
 
 
@@ -119,7 +128,9 @@ if (1 > 2 || 1 > 4) && true == true {
  * }
  */
 
-// @examples
+/**
+ * @examples
+ */
 
 var i = 1
 while i <= 10 {
@@ -143,7 +154,9 @@ while i <= 10 {
  * }
  */
 
-// @examples
+/**
+ * @examples
+ */
 
 // prints 1-10
 for i in 1...10 {
@@ -171,7 +184,9 @@ for i in 0..<10 {
  * }
  */
 
-// @examples
+/**
+ * @examples
+ */
 
 // prints 1-10
 for var i = 1; i <= 10; i = i + 1 {
@@ -250,7 +265,9 @@ ints[2...4]     = [0, 0, 0] // ints => [1, 2, 0, 0, 0]
  * // parameters are followed by their type.
  */
 
-// @examples
+/**
+ * @examples
+ */
 
 func toUpperCase (str: String, num: Int, arr: [String]) -> String {
 	return str;

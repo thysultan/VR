@@ -35,6 +35,14 @@ var foo = 1 // mutable
 let bar = 1 // mutable
 const faz = 1 // immutable
 
+// Error! constants can't be changed
+faz = true;
+
+// OK!
+foo = 1
+// OK!
+bar = 1
+
 
 /**
  * ---------------------------------------------------------------------------------
@@ -111,11 +119,13 @@ if ((1 > 2 || 1 > 4) && true == true) {
  * }
  */
 
-// @examples
+/**
+ * @examples
+ */
 
 var i = 1
 while (i <= 10) {
-    print(i)
+    console.log(i)
     i = i + 1
 }
 
@@ -136,7 +146,9 @@ while (i <= 10) {
  * }
  */
 
-// @examples
+/**
+ * @examples
+ */
 
 // prints 1-10
 for (var i = 1; i <= 10; i = i + 1) {
@@ -197,7 +209,9 @@ dbls[2] = 4.0                 // dbls => [1.0, 2.0, 4.0]
  *
  */
 
-// @examples
+/**
+ * @examples
+ */
 
 function toUpperCase (str, num, arr) {
 	return str;
@@ -299,7 +313,9 @@ class VideoMode {
 let someResolution = new Resolution()
 let someVideoMode = new VideoMode()
 
-// @examples
+/**
+ * @examples
+ */
 
 class SurveyQuestion {
     constructor(text) {
