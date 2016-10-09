@@ -137,7 +137,7 @@ function patchProps (newNode, oldNode) {
 			var prop = diff[i];
 
 			// patchProp calls native api(s)
-			patchProp(prop[0], prop[1], prop[2], prop[3])
+			patchProp(oldNode, prop[0], prop[1], prop[2], prop[3])
 		}
 
 		oldNode.props = newNode.props
