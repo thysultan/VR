@@ -14,12 +14,11 @@
 var integer           = 10
 var integer           = double|0
 var boolean           = true
-var double            = 7.2 
-var double            = integer.toFixed(2)
+var double            = 7.2
 var float             = 7.2
 var string            = "String"
 var any               = null
-var fn                = function foo () -> {}
+var fn                = () -> {}
 
 
 /**
@@ -82,7 +81,7 @@ if ((1 > 2 || 1 > 4) && true == true) {
  *   <=   `less than or equal to`
  *   >=   `greater than or equal to`
  *   !    `negation' i.e !true == false
- *   %    `modulas`
+ *   %    `modulo`
  *   +    `addition`
  *   -    `subtraction`
  *   *    `multiplication`
@@ -96,7 +95,7 @@ if ((1 > 2 || 1 > 4) && true == true) {
  *   does not mean the same thing as “equal to” (represented by two equals signs, or ==):
  *   “Identical to” means that two constants or variables of class type 
  *   refer to exactly the same class instance.
- *   “Equal to” means that two instances are considered “equal” or “equivalent” in value
+ *   “equal to” means that two instances are considered “equal” or “equivalent” in value
  * 
  */
 
@@ -196,7 +195,7 @@ dbls[2] = 4.0                 // dbls => [1.0, 2.0, 4.0]
 /**
  * general syntax
  * 
- * func name(list of parameters) {
+ * function name(list of parameters) {
  * 		statements
  * }
  *
@@ -219,14 +218,15 @@ countdown(5, 3)
 
 // sometimes we want a method that receives any number of arguments. 
 // this is a variadic function. 
-function sumStringLengths() -> Int {
-    var sum = 0
+function sumStringLengths() {
+    var sum = 0;
 
-    for (var value in arguments) {
-		sum += value.length
+    for (var key in arguments) {
+        var value = arguments[key];
+		sum += value.length;
     }
 
-    return sum
+    return sum;
 }
 
 // Call the method with 2 arguments.
@@ -307,15 +307,15 @@ let someVideoMode = new VideoMode()
 
 class SurveyQuestion {
     constructor(text) {
-        this.text = text
-        this.response = ""
+        this.text = text;
+        this.response = "";
     }
     ask() {
-        print(text)
+        console.log(this.text);
     }
 }
 
-let cheeseQuestion = new SurveyQuestion(text: "Do you like cheese?")
+let cheeseQuestion = new SurveyQuestion("Do you like cheese?")
 cheeseQuestion.ask()
 // prints "Do you like cheese?"
 cheeseQuestion.response = "Yes, I do like cheese."
