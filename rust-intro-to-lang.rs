@@ -23,10 +23,10 @@ let boolean: bool      = true;
 let string: &str       = "String"
 let string             = "String" // ^ same thing
 let character          = 'x'; // uses single tick ` ' `
-let arr: [&str; 3]     = ["String 1", "String 2"]; 
-let arr                = ["String 1", "String 2"]; // same thing
+let arr: [&str; 3]     = ["String 1", "String 2", "String 3"]; 
+let arr                = ["String 1", "String 2", "String 3"];
 let tpl: (i32, &str)   = (1, "hello");
-let tpl                = (1, "hello"); // same thing
+let tpl                = (1, "hello");
 let fc: fn(i32) -> i32 = foo;
 
 /**
