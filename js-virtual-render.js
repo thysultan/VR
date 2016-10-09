@@ -150,10 +150,10 @@ function diffProps (newProps, oldProps) {
 	var NS   = oldProps.xmlns;
 
 	for (var newName in newProps) { 
-		diff[diff.length] = diffNewProps(newProps, oldProps, newName, oldValue, NS, diff); 
+		diff[diff.length] = diffNewProps(newProps, oldProps, newName, NS, diff); 
 	}
 	for (var oldName in oldProps) { 
-		diff[diff.length] = diffOldProps(newProps, oldProps, oldName, oldValue, NS, diff);
+		diff[diff.length] = diffOldProps(newProps, oldProps, oldName, NS, diff);
 	}
 
 	return diff;
@@ -170,9 +170,9 @@ function diffNewProps (newProps, oldProps, newName, newValue, NS, diff) {
 }
 
 // diff old props
-function diffOldProps (newProps, oldProps, oldName, oldValue, NS, diff) {
+function diffOldProps (newProps, oldProps, oldName, NS, diff) {
 	if (newProps[oldName] === null || newProps[oldName] === void 0) {
-		diff[diff.length] = ['removeAttribute', oldName, oldValue, NS];
+		diff[diff.length] = ['removeAttribute', oldName, '', NS];
 	}
 }
 
