@@ -141,7 +141,7 @@ func patchProps (newNode: VNode, oldNode: VNode) {
 // diff props
 func diffProps (newProps: [String: Any], oldProps: [String: Any]) -> [Any] {
 	var diff: [Any] = []
-	var NS: String = oldProps.xmlns
+	var NS: Any = oldProps.xmlns
 
 	for (newName, newValue) in newProps {
 	    diff += diffNewProps(newProps, oldProps, newName, newValue, NS)
