@@ -1,6 +1,6 @@
 # Virtual Rendering Implementations
 
-React-Style virtual(diff and patch) rendering Implementations in different programming Languages.
+React-Style virtual(diff and patch) rendering implementations in different programming Languages.
 
 ### Current Implementations
 
