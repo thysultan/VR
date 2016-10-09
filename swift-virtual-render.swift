@@ -5,17 +5,18 @@
 struct VNode {
 	let nodeType: Int // immutable
 	let type: Any     // immutable, String or Function
-	var props: ()     // tuple
+	var props: [String: Any] // dictionary
 	var children: [Any]
 }
 
-func Node (nodeType: Int, type: Any, props: (), children: [VNode]) -> VNode {
+func Node (nodeType: Int, type: Any, props: [String: String], children: [VNode]) -> VNode {
 	return VNode(nodeType: nodeType, type: type, props: props, children: children);
 }
 
 // an EmptyNode
 var EmptyNode = Node(0, "", (), [])
 
+// diff and determine the least amount of actions to update the view
 func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 	// remove
 	if newNode.nodeType == 0 {
@@ -71,7 +72,7 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			for var i:Int = 0; i < newLength || i < oldLength; i = i + 1 {
 			    var newChild: VNode = currentNode.children[i] || EmptyNode
 			    var oldChild: VNode = oldNode.children[i] || EmptyNode
-			    var action: Int    = reconciler(newChild, oldChild)
+			    var action: Int = reconciler(newChild, oldChild)
 
 			    if action != 0 {
 			    	var index:Int = i - deleteCount;
@@ -113,9 +114,65 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 	return 0
 }
 
+// patch props
+func patchProps (newNode: VNode, oldNode: VNode) {
+	var diff: [Any] = diffProps(newNode.props, oldNode.props)
+	var length: Int = diff.count
+
+	if length != 0 {
+		for var i = 0; i < length; i = i + 1 {
+			var prop = diff[i]
+
+			// patchProp makes calls to native api's
+			patchProp(prop[0], prop[1], prop[2])
+		}
+
+		oldNode.props = newNode.props
+	}
+}
+
+// diff props
+func diffProps (newProps: [String: String], oldProps: [String: String]) -> [Any] {
+	var diff: [Any] = []
+
+	for (newName, newValue) in newProps { 
+	    diff += diffNewProps(newProps, oldProps, newName, newValue)
+	}
+
+	for (oldName, oldValue) in oldProps {
+	    diff += diffNewProps(newProps, oldProps, oldName, oldValue)
+	}
+
+	return diff
+}
+
+// diff new props
+func diffNewProps (newProps: [String: String], oldProps: [String: String], newName: String, newValue: String) -> [Any] {
+	var oldValue: String = oldProps[newName]
+	var diff: [Any] = []
+
+	if (newValue != nil && oldValue !== newValue) {
+		diff += ["setAttribute", newName, newValue]
+	}
+
+	return diff
+}
+
+// diff old props
+func diffOldProps (newProps: [String: String], oldProps: [String: String], oldName: String, oldValue: String) -> [Any] {
+	var diff: [Any] = []
+
+	if (newProps[oldName] == nil || newProps[oldName] === nil) {
+		diff += ["removeAttribute", newName, newValue]
+	}
+
+	return diff
+}
+
+
 // a TextNode
-var TextNode = Node(3, "Text", (), ["Hello World"])
+var TextNode = Node(3, "Text", [:], ["Hello World"])
 // an ElementNode NavBar with one TextNode child
-var ElementNode = Node(1, "NavBar", (state: "active"), [TextNode])
+var ElementNode = Node(1, "NavBar", ["state": "active"], [TextNode])
 
 reconciler(ElementNode, ElementNode)

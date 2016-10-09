@@ -120,6 +120,54 @@ function reconciler (newNode, oldNode) {
 	return 0;
 }
 
+// patch props
+function patchProps (newNode, oldNode) {
+	var diff = diffProps(newNode.props, oldNode.props);
+	var length = diff.length;
+
+	if (length !== 0) {
+		for (var i = 0; i < length; i = i + 1) {
+			var prop = diff[i];
+
+			// patchProp makes calls to native api's
+			patchProp(prop[0], prop[1], prop[2], prop[3])
+		}
+
+		oldNode.props = newNode.props
+	}
+}
+
+// diff props
+function diffProps (newProps, oldProps) {
+	var diff = [];
+
+	for (var newName in newProps) { 
+		diff[diff.length] = diffNewProps(newProps, oldProps, newName, NS, diff); 
+	}
+	for (var oldName in oldProps) { 
+		diff[diff.length] = diffOldProps(newProps, oldName, oldValue, NS, diff); 
+	}
+
+	return diff;
+}
+
+// diff new props
+function diffNewProps (newProps, oldProps, newName, newValue, NS, diff) {
+	var newValue = newProps[newName]; 
+	var oldValue = oldProps[newName];
+
+	if (newValue !== void 0 && newValue !== null && oldValue !== newValue) {
+		diff[diff.length] = ['setAttribute', newName, newValue, NS];
+	}
+}
+
+// diff old props
+function diffOldProps (newProps, oldProps, oldName, oldValue, NS, diff) {
+	if (newProps[oldName] === null || newProps[oldName] === void 0) {
+		diff[diff.length] = ['removeAttribute', oldName, oldValue, NS];
+	}
+}
+
 // a TextNode
 var TextNode = Node(3, "Text", {}, ["Hello World"])
 // an ElementNode NavBar with one TextNode child
