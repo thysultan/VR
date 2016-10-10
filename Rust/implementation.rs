@@ -6,7 +6,7 @@ struct VNode {
     nodeType: i32,
     nodeName: <Any>,
     props: HashMap<&str, <Any>>,
-    children: Vec<VNode>
+    children: Vec<Any>
 }
 
 fn Node (nodeType: i32, nodeName: <Any>, props: HashMap<&str, <Any>>, children: Vec<VNode>) -> VNode {

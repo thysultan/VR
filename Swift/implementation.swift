@@ -6,7 +6,7 @@ struct VNode {
 	let nodeType: Int // immutable
 	let nodeName: Any     // immutable, String or Function
 	var props: [String: Any] // dictionary
-	var children: [VNode] // mmutable
+	var children: [Any] // mmutable
 }
 
 func Node (nodeType: Int, nodeName: Any, props: [String: Any], children: [VNode]) -> VNode {
