@@ -1,5 +1,9 @@
 /**
+ * ---------------------------------------------------------------------------------
+ * 
  * @types
+ * 
+ * ---------------------------------------------------------------------------------
  */
 
  
@@ -17,7 +21,7 @@ var boolean: Bool     = true
 var double: Double    = 7.2 
 var double: Double    = Double(integer)
 var float: Fouble     = 7.2
-var string: String    = "String"
+var string: String    = "String" // uses double "" tick
 var any:Any           = nil
 var intOpt:Int?       = 42 // Optional Int -> intOpt! to access value
 var fn: () -> Int     = func foo() -> Int {}
@@ -32,6 +36,7 @@ var tpl: Tuple        = (name: "Sultan", age: 25)
  * 
  * ---------------------------------------------------------------------------------
  */
+
 
 // anything created with `var` is mutable, anything created with `let` is immutable
 
@@ -119,6 +124,7 @@ if (1 > 2 || 1 > 4) && true == true {
  * 
  * ---------------------------------------------------------------------------------
  */
+
 
  // A while loop performs a set of statements until a condition becomes false.
 
@@ -273,7 +279,7 @@ func toUpperCase (str: String, num: Int, arr: [String]) -> String {
 	return str;
 }
 
-// which you can call like
+// which you can call the function like
 toUpperCase("A String", 10, ["String"]);
 // or
 toUpperCase("A String", num: 10, arr: ["String"])
@@ -342,7 +348,7 @@ func sumStringLengths(values: String...) -> Int {
     return sum
 }
 
-// Call the method with 2 arguments.
+// call the method with 2 arguments.
 let result = sumStringLengths("bird", "cat")
 print(result)
 
@@ -354,6 +360,7 @@ print(result)
  * 
  * ---------------------------------------------------------------------------------
  */
+
 
 // A dictionary is a container that stores multiple values of the same type. 
 // each value is associated with a unique key, which acts as an identifier for 
@@ -414,11 +421,14 @@ stringsAsInts["three"] = nil
 
 // a tuple is a group of zero or more values represented as one value.
 // the type of a tuple is determined by the values it has. 
-// So ("tuple", 1, true) will be of type (String, Int, Bool). 
+// so ("tuple", 1, true) will be of type (String, Int, Bool). 
 // () is the empty tuple – it has no elements. It also represents the Void type.
 
 // named tuple declare, assign
 let person = (name:"Midhun", age:7)
+
+(0.0, 4.5);
+("a", 4usize, true);
 
 // access
 person.name
@@ -444,6 +454,7 @@ func abc() -> (Int, Int, String) {
  * 
  * ---------------------------------------------------------------------------------
  */
+
 
 // syntax begins with the `struct` keyword followed by the `name` and a pair of curly braces. 
 // everything in-between the curly braces is a `member` of the struct.
@@ -513,6 +524,7 @@ range.isInRange(customer) // => true!
  * ---------------------------------------------------------------------------------
  */
 
+
 // classes and structures have a similar definition syntax. 
 // you introduce classes with the class keyword and structures with the struct keyword. 
 // Both place their entire definition within a pair of braces:
@@ -544,7 +556,9 @@ class VideoMode {
 let someResolution = Resolution()
 let someVideoMode = VideoMode()
 
-// @examples
+/**
+ * @examples
+ */
 
 class SurveyQuestion {
     let text: String

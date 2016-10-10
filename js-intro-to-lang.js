@@ -1,5 +1,9 @@
 /**
+ * ---------------------------------------------------------------------------------
+ * 
  * @types
+ * 
+ * ---------------------------------------------------------------------------------
  */
 
  
@@ -16,7 +20,7 @@ var integer           = double|0
 var boolean           = true
 var double            = 7.2
 var float             = 7.2
-var string            = "String"
+var string            = "String" // uses double "" or single '' or even `` ticks
 var any               = null
 var fn                = () -> {}
 
@@ -28,6 +32,7 @@ var fn                = () -> {}
  * 
  * ---------------------------------------------------------------------------------
  */
+
 
 // anything created with `var` or `let` is mutable, anything created with `const` is immutable
 
@@ -111,6 +116,7 @@ if ((1 > 2 || 1 > 4) && true == true) {
  * ---------------------------------------------------------------------------------
  */
 
+
  // A while loop performs a set of statements until a condition becomes false.
 
 /**
@@ -169,6 +175,7 @@ for (var i = 10; i > 0; --i) {
  * ---------------------------------------------------------------------------------
  */
 
+
 // though arrays in javascript can hold any type of value arrays can act
 // as typed arrays post VM's optimization if they remain monomorphic
 var ints           = [1, 2, 3]
@@ -217,7 +224,7 @@ function toUpperCase (str, num, arr) {
 	return str;
 }
 
-// which you can call like
+// which you can call the function like
 toUpperCase("A String", 10, ["String"]);
 
 // default parameters
@@ -239,7 +246,7 @@ function sumStringLengths() {
     return sum;
 }
 
-// Call the method with 2 arguments.
+// call the method with 2 arguments.
 let result = sumStringLengths("bird", "cat")
 console.log(result)
 
@@ -251,6 +258,7 @@ console.log(result)
  * 
  * ---------------------------------------------------------------------------------
  */
+
 
 // A dictionary is a container that stores multiple values
 // each value is associated with a unique key, which acts as an identifier for 
@@ -288,6 +296,7 @@ stringsAsInts["three"] = null
  * 
  * ---------------------------------------------------------------------------------
  */
+
 
 // you introduce classes with the class keyword with the definition within a pair of braces:
 class SomeClass {

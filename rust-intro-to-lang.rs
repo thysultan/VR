@@ -21,7 +21,7 @@
 let integer: i32       = 10;
 let float: f64         = 7.2;
 let boolean: bool      = true;
-let string: &str       = "String"
+let string: &str       = "String" // uses double "" tick
 let string             = "String" // ^ same thing
 let character          = 'x'; // uses single tick ` ' `
 let arr: [&str; 3]     = ["String 1", "String 2", "String 3"]; // fixed size array
@@ -154,13 +154,13 @@ while i <= 10 {
  */
 
 // prints 1-10
-for x in 0..11 {
-    print(i)
+for i in 0..11 {
+    println!(i);
 }
 
 // prints 10-1
-for x in 11..0 {
-    print(i)
+for i in 11..0 {
+    println!(i);
 }
 
 
@@ -225,5 +225,181 @@ match v.get(7) {
     Some(x) => println!("Item 7 is {}", x),
     None => println!("Sorry, this vector is too short.")
 }
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
+ * @functions
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+/**
+ * general syntax
+ * 
+ * fn name(list of parameters) -> return type {
+ * 		statements
+ * }
+ *
+ * // some functions don’t return any values
+ * 
+ * func name(list of parameters) {
+ * 		statements
+ * }
+ *
+ * // parameters are followed by their type.
+ * // expressions without a `;` a treated as return values
+ * // but you can also use return explicity
+ */
+
+/**
+ * @examples
+ */
+
+fn toUpperCase(str: &str, num: &i32, arr: Vec<&str>) -> &str {
+	str // returns str, `return str;` is also valid but `str;` will return ()
+}
+
+// rust has special syntax for ‘diverging functions’, 
+// which are functions that do not return:
+
+fn doesNotReturn() -> ! {
+    println!("this function never returns!");
+}
+
+// not to be confused with functions that return () `an empty tuple`
+fn doesReturn() -> () {
+    str;
+}
+
+// you can also create variable bindings which point to functions:
+let toUpperCase: fn(str: &str, num: &i32, arr: Vec<&str>) -> &str = toUpperCase;
+// we can write the same thing as, the types will be infered
+let toUpperCase = toUpperCase;
+
+// which you can call the function like
+toUpperCase("A String", 10, ["String"]);
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
+ * @dictionaries
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
+ * @tuples
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+// a tuple is a group of zero or more values represented as one value.
+// the type of a tuple is determined by the values it has. 
+// so ("tuple", 1, true) will be of type (&str, i32, bool). 
+// () is the empty tuple – it has no elements. it also represents the void-like type.
+// tuple elements in rust do not have a name
+
+// explicit type
+type Person<'a> = (&str, i32);
+let person: Person<'static> = ("Midhun", 7);
+
+// infered type 
+let person = ("Midhun", 7);
+
+// access
+let (name, age) = person;
+// or
+person.0
+person.1
+
+// you can use a tuple to return multiple values from a function as a single compound value.
+fn abc() -> (i32, i32, &str) {
+    return (3, 5, "Carl"); // see @functions section this can also become just `(3, 5, "Carl")`
+}
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
+ * @structs
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+
+ // syntax begins with the `struct` keyword followed by the `name` and a pair of curly braces. 
+ // everything in-between the curly braces is a `member` of the struct.
+ struct Location {
+     latitude: f64,
+     longitude: f64,
+ }
+
+// tuple structs
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+let black = Color(0, 0, 0);
+let origin = Point(0, 0, 0);
+
+// you can instantiate one and store it in a constant or variable like any other type
+let pizzaLocation: Location = Location { latitude: 44.9871, longitude: -93.2758 }
+
+// nested structs
+struct DeliveryRange {
+	range: f64
+	center: Location
+}
+
+let storeLocation: Location = Location { latitude: 44.9871, longitude: -93.2758}
+let mut pizzaRange: DeliveryRange = DeliveryRange { range: 200, center: storeLocation}
+
+// access
+println!(pizzaRange.range)           // => 200
+
+// since pizzaRange.center is a Location struct
+println!(pizzaRange.center.latitude) // => 44.9871
+
+// re-assign
+pizzaRange.range = 250
+
+
+// much like a struct can have constants and variables, it can also define its own functions:
+struct DeliveryRange {
+	range: f64
+	center: Location
+}
+
+impl DeliveryRange {
+	fn isInRange(customer: Location) -> bool {
+    	let difference = ((customer.latitude - center.latitude).powi(2) + (customer.longitude - center.longitude).powi(2)).sqrt();
+
+    	return difference < range;
+	}
+}
+
+// instantiate
+let range: DeliveryRange = DeliveryRange(150, Location(44.9871,-93.2758));
+let customer: Location = Location(44.9850,-93.2750);
+ 
+// call method
+range.isInRange(customer) // => true!
+
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
+ * @classes
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+
 
 // ... to be continued ->
