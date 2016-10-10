@@ -2,7 +2,7 @@
 
 React-Style virtual(diff and patch) rendering implementations in different programming Languages.
 
-`langName-intro-to-lang.ext` features a quick tutorial on the specifics of that languages syntax design
+`intro.ext` features a quick tutorial on the specifics of that specific languages syntax design
 which may serve as a good way to learn a new language from the point of view of another through comparing
 how the same thing is implemented in the language vs your language of choice. 
 
@@ -22,9 +22,9 @@ that address the particular opertation in question.
 - GO
 
 Open to pull requests for other Languages listed or not listed in the list of current implementations or roadmap. 
-The only contributing quide is to include a `langName-intro-to-lang.ext` file
+The only contributing guide is to include a `intro.ext` file
 that gives a quick run down of the languages common syntax design and 
-`langName-virtual-render.ext` that houses the implementation.
+`implementation.ext` that houses the implementation.
 
 ### What is React-Style?
 
