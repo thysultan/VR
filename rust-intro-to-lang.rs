@@ -194,7 +194,7 @@ let mut strs: Vec<&str>  = vec!["A", "B", "C"];
 let mut buls: Vec<&bool> = vec![true, false, true];
 let mut flts: Vec<&f64>  = vec![1.0, 2.0, 3.0];
 
-// we could leave the explicit mention of Vec<>
+// we could leave out the explicit mention of Vec<>
 let mut ints = vec![1, 2, 3];
 let mut strs = vec!["A", "B", "C"];
 let mut buls = vec![true, false, true];
