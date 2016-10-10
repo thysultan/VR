@@ -291,16 +291,12 @@ toUpperCase("A String", 10, ["String"]);
  */
 
 
-// A dictionary is a container that stores multiple values of the same type. 
+// a dictionary is a container that stores multiple values of the same type. 
 // each value is associated with a unique key, which acts as an identifier for 
 // that value within the dictionary
 
-// you must declare `use std::collections::HashMap;`
-// to use HashMaps in a file
-use std::collections::HashMap;
-
 // create
-let mut dictionary = HashMap::new();
+let mut dictionary = ::std::collections::HashMap::new();
 
 // insert
 contacts.insert("one", 1);
@@ -338,6 +334,18 @@ for (key, val) in stringsAsInts.iter() {
 for key in stringsAsInts.keys() {
     println!("{}", key);
 }
+
+// there isn't a map literal syntax in rust. however, you can create a macro
+macro_rules! map(
+    { $($key:expr => $value:expr),+ } => {
+        {
+            let mut m = ::std::collections::HashMap::new();
+            $(m.insert($key, $value);)+m
+        }
+     };
+);
+
+let names = map!{1 => "one",2 => "two"};
 
 
 /**
