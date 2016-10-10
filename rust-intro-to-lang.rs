@@ -285,7 +285,7 @@ toUpperCase("A String", 10, ["String"]);
 /**
  * ---------------------------------------------------------------------------------
  * 
- * @dictionaries
+ * @collections
  * 
  * ---------------------------------------------------------------------------------
  */
@@ -375,17 +375,27 @@ struct DeliveryRange {
 	center: Location
 }
 
+// above we’ve made a struct that represents a DeliveryRange. 
+// we then write an impl block, and inside it, define a method, isInRange.
 impl DeliveryRange {
-	fn isInRange(customer: Location) -> bool {
+	// methods take a special first parameter, 
+	// of which there are three variants: self, &self, and &mut 
+	// `self` if it’s a value on the stack, `&self` if it’s a reference, and `&mut self` if it’s a mutable reference.
+	// we mainly use `&self` and `&mut self`
+	// it this case we use &self because we do not need to mutate center and range
+	// NOTE: functions without the explicit self parameter are considered associated functions, 
+	// which can be called without a specific instance.
+	fn isInRange(&self, customer: Location) -> bool {
+		let center: Location = self.center;
     	let difference = ((customer.latitude - center.latitude).powi(2) + (customer.longitude - center.longitude).powi(2)).sqrt();
 
-    	return difference < range;
+    	return difference < self.range;
 	}
 }
 
 // instantiate
-let range: DeliveryRange = DeliveryRange(150, Location(44.9871,-93.2758));
-let customer: Location = Location(44.9850,-93.2750);
+let range: DeliveryRange = DeliveryRange(150, Location(44.9871, -93.2758));
+let customer: Location = Location(44.9850, -93.2750);
  
 // call method
 range.isInRange(customer) // => true!
@@ -395,7 +405,7 @@ range.isInRange(customer) // => true!
 /**
  * ---------------------------------------------------------------------------------
  * 
- * @classes
+ * @traits
  * 
  * ---------------------------------------------------------------------------------
  */
