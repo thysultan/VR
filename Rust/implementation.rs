@@ -55,7 +55,6 @@ fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 			patchProps(currentNode, oldNode);
 		}
 
-
 		let mut newLength: i32 = currentNode.children.len()
 		let mut oldLength: i32 = oldNode.children.len()
 
