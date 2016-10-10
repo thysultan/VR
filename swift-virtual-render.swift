@@ -13,8 +13,8 @@ func Node (nodeType: Int, type: Any, props: [String: Any], children: [VNode]) ->
 	return VNode(nodeType: nodeType, type: type, props: props, children: children);
 }
 
-// an EmptyNode
-var EmptyNode = Node(0, "", (), [])
+// an emptyNode
+var emptyNode = Node(0, "", (), [])
 
 // diff and determine the least amount of actions to update the view
 func reconciler (newNode: VNode, oldNode: VNode) -> Int {
@@ -74,9 +74,22 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			var deleteCount:Int = 0
 
 			for var i:Int = 0; i < newLength || i < oldLength; i = i + 1 {
-			    var newChild: VNode = currentChildren[i] || EmptyNode
-			    var oldChild: VNode = oldChildren[i] || EmptyNode
-			    var action: Int     = reconciler(newChild, oldChild)
+			    var newChild: VNode
+			    var oldChild: VNode
+
+			    if newLength >= i { // currentChildren has an element at that index
+			    	newChild = currentChildren[i]
+			    } else { // element does not exist, assign an emptyNode
+			    	newChild = emptyNode
+			    }
+
+			    if oldLength >= i { // oldChildren has an element at that index
+			    	oldChild = oldChildren[i]
+			    } else { // element does not exist, assign an emptyNode
+			    	oldChild = emptyNode
+			    }
+
+			    var action: Int = reconciler(newChild, oldChild)
 
 			    if action != 0 {
 			    	var index:Int = i - deleteCount;
@@ -156,10 +169,17 @@ func diffProps (newProps: [String: Any], oldProps: [String: Any]) -> [Any] {
 
 // diff new props
 func diffNewProps (newProps: [String: Any], oldProps: [String: Any], newName: String, newValue: String, NS: String) -> [Any] {
-	var oldValue: String = oldProps[newName]
 	var diff: [Any] = []
+	var oldValue: Any?
 
-	if newValue != nil && (oldValue == nil || oldValue! !== newValue) {
+	// if the newProp's key is in oldProps assign oldValue to it
+	if oldProps[newName] != nil {
+	    oldValue = oldProps[newName]!
+	} else {
+		oldValue = nil
+	}
+
+	if newValue != nil && oldValue !== newValue) {
 		diff += ["setAttribute", newName, newValue, NS]
 	}
 

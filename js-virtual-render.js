@@ -16,7 +16,7 @@ function Node (nodeType, type, props, children) {
 }
 
 // an EmptyNode
-var EmptyNode = Node(0, "", {}, []);
+var emptyNode = Node(0, "", {}, []);
 
 function reconciler (newNode, oldNode) {
 	// remove
