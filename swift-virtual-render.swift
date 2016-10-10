@@ -4,17 +4,17 @@
 
 struct VNode {
 	let nodeType: Int // immutable
-	let type: Any     // immutable, String or Function
+	let nodeName: Any     // immutable, String or Function
 	var props: [String: Any] // dictionary
-	var children: [VNode]
+	var children: [VNode] // mmutable
 }
 
-func Node (nodeType: Int, type: Any, props: [String: Any], children: [VNode]) -> VNode {
-	return VNode(nodeType: nodeType, type: type, props: props, children: children);
+func Node (nodeType: Int, nodeName: Any, props: [String: Any], children: [VNode]) -> VNode {
+	return VNode(nodeType: nodeType, nodeName: nodeName, props: props, children: children);
 }
 
 // an emptyNode
-var emptyNode = Node(0, "", (), [])
+var emptyNode: VNode = Node(0, "", [:], [])
 
 // diff and determine the least amount of actions to update the view
 func reconciler (newNode: VNode, oldNode: VNode) -> Int {
@@ -38,12 +38,12 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 		return 5
 	}
 	// replace
-	else if newNode.type != oldNode.type {
+	else if newNode.nodeName != oldNode.nodeName {
 		return 4
 	}
 	// recursive
 	else {
-		// extractNode will handle when newNode.type is a component constructor instead of a string
+		// extractNode will handle when newNode.nodeName is a component constructor instead of a string
 		var currentNode: VNode = extractNode(newNode)
 
 		// identical, exit early
@@ -71,9 +71,9 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 				oldNode.children = currentChildren
 			}
 		} else {
-			var deleteCount:Int = 0
+			var deleteCount: Int = 0
 
-			for var i:Int = 0; i < newLength || i < oldLength; i = i + 1 {
+			for var i: Int = 0; i < newLength || i < oldLength; i = i + 1 {
 			    var newChild: VNode
 			    var oldChild: VNode
 
@@ -92,13 +92,13 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			    var action: Int = reconciler(newChild, oldChild)
 
 			    if action != 0 {
-			    	var index:Int = i - deleteCount;
+			    	var index: Int = i - deleteCount
 
 			    	switch action {
 			    		// remove operation
 			    		case 1: {
 			    			// removeNode calls native api(s)
-			    			removeNode(oldNode, index);
+			    			removeNode(oldNode, index)
 			    			oldchildren.removeAtIndex(index)
 			    			deleteCount = deleteCount + 1
 			    		}

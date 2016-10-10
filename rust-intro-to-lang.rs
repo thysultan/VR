@@ -32,6 +32,9 @@ let tpl: (i32, &str)   = (1, "hello");
 let tpl                = (1, "hello"); // ^ same thing
 let fc: fn(i32) -> i32 = foo;
 
+// you can also use <T: Type> to case a custom type
+// for example <T: Any>
+
 
 /**
  * ---------------------------------------------------------------------------------
@@ -210,11 +213,10 @@ buls.remove(0);            // buls => [false, true]
 flts[2] = 4.0              // flts => [1.0, 2.0, 4.0]
 
 // trying to access an index that does not exist
-
 let v = vec![1, 2, 3];
 println!("Item 7 is {}", v[7]);
-// then the current thread will panic with a message like this:
 
+// then the current thread will panic with a message like this:
 // thread 'main' panicked at 'index out of bounds: the len is 3 but the index is 7'
 
 // If you want to handle out-of-bounds errors without panicking, 
@@ -335,7 +337,7 @@ for key in stringsAsInts.keys() {
     println!("{}", key);
 }
 
-// there isn't a map literal syntax in rust. however, you can create a macro
+// there are no map literals in rust. however, you can create a macro
 macro_rules! map(
     { $($key:expr => $value:expr),+ } => {
         {
@@ -345,6 +347,7 @@ macro_rules! map(
      };
 );
 
+// use case
 let names = map!{1 => "one",2 => "two"};
 
 
@@ -390,12 +393,12 @@ fn abc() -> (i32, i32, &str) {
  */
 
 
- // syntax begins with the `struct` keyword followed by the `name` and a pair of curly braces. 
- // everything in-between the curly braces is a `member` of the struct.
- struct Location {
-     latitude: f64,
-     longitude: f64,
- }
+// syntax begins with the `struct` keyword followed by the `name` and a pair of curly braces. 
+// everything in-between the curly braces is a `member` of the struct.
+struct Location {
+    latitude: f64,
+    longitude: f64,
+}
 
 // tuple structs
 struct Color(i32, i32, i32);

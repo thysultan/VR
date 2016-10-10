@@ -3,16 +3,16 @@
  */
 
 class VNode () {
-	constructor (nodeType, type, props, children) {
+	constructor (nodeType, nodeName, props, children) {
 		this.nodeType = nodeType;
-		this.type = type;
+		this.nodeName = nodeName;
 		this.props = props;
 		this.children = children;
 	}
 }
 
-function Node (nodeType, type, props, children) {
-	return new VNode(nodeType, type, props, children);
+function Node (nodeType, nodeName, props, children) {
+	return new VNode(nodeType, nodeName, props, children);
 }
 
 // an EmptyNode
@@ -39,12 +39,12 @@ function reconciler (newNode, oldNode) {
 		return 5;
 	}
 	// replace
-	else if (newNode.type !== oldNode.type) {
+	else if (newNode.nodeName !== oldNode.nodeName) {
 		return 4;
 	}
 	// recursive
 	else {
-		// extract will handle when newNode.type is a component constructor instead of a string
+		// extract will handle when newNode.nodeName is a component constructor instead of a string
 		var currentNode = extractNode(newNode);
 
 		// identical, exit early
