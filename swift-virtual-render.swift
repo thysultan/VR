@@ -159,7 +159,7 @@ func diffNewProps (newProps: [String: Any], oldProps: [String: Any], newName: St
 	var oldValue: String = oldProps[newName]
 	var diff: [Any] = []
 
-	if newValue != nil && oldValue !== newValue {
+	if newValue != nil && (oldValue == nil || oldValue! !== newValue) {
 		diff += ["setAttribute", newName, newValue, NS]
 	}
 
@@ -170,7 +170,7 @@ func diffNewProps (newProps: [String: Any], oldProps: [String: Any], newName: St
 func diffOldProps (newProps: [String: Any], oldProps: [String: Any], oldName: String, oldValue: String, NS: String) -> [Any] {
 	var diff: [Any] = []
 
-	if newProps[oldName] == nil || newProps[oldName] === nil {
+	if newProps[oldName] == nil {
 		diff += ["removeAttribute", newName, newValue, NS]
 	}
 

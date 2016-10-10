@@ -373,6 +373,7 @@ var dictionary: [String: Int] = [
     "two" : 2,
     "three" : 3
 ]
+
 var emptyDictionary: [Int: Int] = [:]
 
 // access specific elements using subscript syntax, 
@@ -380,17 +381,17 @@ var emptyDictionary: [Int: Int] = [:]
 // because it’s possible not to have a value associated with the provided key 
 // the subscript will return an optional value of the value type.
 
-// To unwrap the value returned by the subscript you can do one of two things: 
+// to unwrap the value returned by the subscript you can do one of two things: 
 // use optional binding or force the value if you know for sure it exists.
 
 dictionary["one"] // Optional(1)
 
-// Unwaraping the optional using optional binding
+// unwaraping the optional using optional binding
 if let twoAsInt = dictionary["two"] {
     print(twoAsInt) // 2
 }
 
-// Unwaraping the optional using the forced value operator (!)
+// unwaraping the optional using the forced value operator (!)
 dictionary["one"]! // 1
 
 // simplest way to add a value to a dictionary is by using the subscript syntax:
@@ -400,14 +401,20 @@ var stringsAsInts: [String: Int] = [
     "two" : 2
 ]
 
+// adds a new key->value pair to the dictionary
 stringsAsInts["three"] = 3
-// Using the subscript syntax you can change a the value associated with a key:
 
+// using the subscript syntax you can change a value associated with a key:
 stringsAsInts["three"] = 10
 
-// To remove a value from the dictionary 
+// to remove a value from the dictionary 
 // you can use the subscript syntax to set the value to nil
 stringsAsInts["three"] = nil
+
+// to iterate over the dictionaryyou could do
+for (key, value) in stringsAsInts {
+
+}
 
 
 /**

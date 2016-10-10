@@ -265,11 +265,13 @@ console.log(result)
 // that value within the dictionary
 
 // syntax({KeyType: ValueType}) i.e {key: value, key: value, ...}
+// 
 var dictionary = {
     one: 1,
     two: 2,
     three: 3
 }
+
 var emptyDictionary = {}
 
 // simplest way to add a values to a dictionary:
@@ -279,14 +281,15 @@ var stringsAsInts = {
     two: 2
 }
 
+// adds a new key->value pair to the dictionary
 stringsAsInts["three"] = 3
-// Using the subscript syntax you can change a the value associated with a key:
 
+// using the subscript syntax you can change a value associated with a key:
 stringsAsInts["three"] = 10
 
-// To remove a value from the dictionary 
-// you can use the subscript syntax to set the value to nil
-stringsAsInts["three"] = null
+// to remove a value from the dictionary 
+// you can use the delete keyword
+delete stringsAsInts["three"]
 
 
 /**

@@ -285,10 +285,59 @@ toUpperCase("A String", 10, ["String"]);
 /**
  * ---------------------------------------------------------------------------------
  * 
- * @collections
+ * @dictionaries
  * 
  * ---------------------------------------------------------------------------------
  */
+
+
+// A dictionary is a container that stores multiple values of the same type. 
+// each value is associated with a unique key, which acts as an identifier for 
+// that value within the dictionary
+
+// you must declare `use std::collections::HashMap;`
+// to use HashMaps in a file
+use std::collections::HashMap;
+
+// create
+let mut dictionary = HashMap::new();
+
+// insert
+contacts.insert("one", 1);
+contacts.insert("two", 2);
+contacts.insert("three", 3);
+
+
+// access
+match dictionary.get("one") {
+    Some(value) => // do something with it if it exists
+    None => // do something if it does not exist
+}
+
+// what if we want to replace a keys value
+let mut stringsAsInts = HashMap::new();
+
+stringsAsInts.insert("zero", 0);
+stringsAsInts.insert("one", 1);
+stringsAsInts.insert("two", 2);
+
+contacts.insert("three", 3);
+
+// using .insert you can change a value associated with a key:
+contacts.insert("three", 10);
+
+// to remove a value from the dictionary 
+// you can use the .remove method on the dictionary
+stringsAsInts.remove("The Adventures of Sherlock Holmes");
+
+// to iterate over the dictionary you could do
+for (key, val) in stringsAsInts.iter() {
+    println!("key: {} val: {}", key, val);
+}
+// or
+for key in stringsAsInts.keys() {
+    println!("{}", key);
+}
 
 
 /**
@@ -399,17 +448,3 @@ let customer: Location = Location(44.9850, -93.2750);
  
 // call method
 range.isInRange(customer) // => true!
-
-
-
-/**
- * ---------------------------------------------------------------------------------
- * 
- * @traits
- * 
- * ---------------------------------------------------------------------------------
- */
-
-
-
-// ... to be continued ->
