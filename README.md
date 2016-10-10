@@ -1,6 +1,6 @@
 # Virtual Rendering Implementations
 
-React-Style virtual(diff and patch) rendering implementations in different programming Languages.
+React-Style virtual rendering implementations in different programming Languages.
 
 `intro.ext` features a quick tutorial on the specifics of that specific languages syntax design
 which may serve as a good way to learn a new language from the point of view of another through comparing
