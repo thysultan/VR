@@ -74,24 +74,15 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			var deleteCount: Int = 0
 
 			for var i: Int = 0; i < newLength || i < oldLength; i = i + 1 {
-			    var newChild: VNode
-			    var oldChild: VNode
-
-			    if newLength >= i { // currentChildren has an element at that index
-			    	newChild = currentChildren[i]
-			    } else { // element does not exist, assign an emptyNode
-			    	newChild = emptyNode
-			    }
-
-			    if oldLength >= i { // oldChildren has an element at that index
-			    	oldChild = oldChildren[i]
-			    } else { // element does not exist, assign an emptyNode
-			    	oldChild = emptyNode
-			    }
+			    var newChild: VNode = newLength >= i ? currentChildren[i] : emptyNode
+			    var oldChild: VNode = oldLength >= i ? oldChildren[i] : emptyNode
 
 			    var action: Int = reconciler(newChild, oldChild)
 
 			    if action != 0 {
+			    	// we use this to resolve to the correct index 
+			    	// because the index/length of the children array
+			    	// could change over time in case of remove/creation actions
 			    	var index: Int = i - deleteCount
 
 			    	switch action {
@@ -100,6 +91,7 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			    			// removeNode calls native api(s)
 			    			removeNode(oldNode, index)
 			    			oldchildren.removeAtIndex(index)
+			    			// update deleteCount, increment
 			    			deleteCount = deleteCount + 1
 			    		}
 			    		// add operation
@@ -107,6 +99,7 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			    			// addNode calls native api(s)
 			    			addNode(oldNode, newChild, index)
 			    			oldchildren.insert(newChild, atIndex: index)
+			    			// update deleteCount, decrement
 			    			deleteCount = deleteCount - 1
 			    		}
 			    		// text operation

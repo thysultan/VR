@@ -3,13 +3,13 @@
  */
 
  
-// signed integers(i8, i16, i32, i64 and isize), i32 is the main actor
+// signed integers(i8, i16, i32, i64 and isize)
 // unsigned integers(u8, u16, u32, u64 and usize), 
-// floating point, (f32, f64) f64 is the main actor
-// char,  unicode scalar values like 'a', 'α' and '∞'
+// floating point, (f32, f64)
+// char, unicode scalar values like 'a', 'α' and '∞'
 // bool, true or false
 // arrays, [1, 2, 3]
-// vectors, re-sizable arrays
+// vectors, re-sizable arrays <Vec>
 // tuples, (1, true)
 
  
@@ -19,7 +19,8 @@
 
 
 let integer: i32       = 10;
-let float: f64         = 7.2;
+let double: f64        = 7.2320430234;
+let float: f32         = 7.2;
 let boolean: bool      = true;
 let string: &str       = "String" // uses double "" tick
 let string             = "String" // ^ same thing

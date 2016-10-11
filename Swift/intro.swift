@@ -7,7 +7,7 @@
  */
 
  
-// Int, Bool, String, Double, Any, Float, Void, Array, Tuple, () -> T, <T>
+// Int, Bool, String, Double, Any, Float, Void, Array, Tuple, () -> T, Generic Types <T>
 
  
 /**
@@ -18,16 +18,16 @@
 var integer: Int      = 10
 var integer: Int      = Int(double) 
 var boolean: Bool     = true
-var double: Double    = 7.2 
+var double: Double    = 7.2320430234 
 var double: Double    = Double(integer)
 var float: Fouble     = 7.2
-var string: String    = "String" // uses double "" tick
-var any: Any?         = nil // ? indicates the value could be nil
-var intOpt:Int?       = 42 // Optional Int -> intOpt! to access value
+var float: Fouble     = Float(integer)
+var string: String    = "String"                  // uses double "" tick
+var any: Any?         = nil                       // ? indicates the value could be nil
 var fn: () -> Int     = func foo() -> Int {}
 var arr: [String]     = ["String 1", "String 2"]
 var tpl: Tuple        = (name: "Sultan", age: 25)
-var gen: T? // generic type
+var gen: T?                                       // generic type
 
 
 /**
@@ -83,6 +83,9 @@ if (1 > 2 || 1 > 4) && true == true {
 	print("1 is less than 2");
 }
 
+// short hand
+(1 > 2 || 1 > 4) && true == true ? print("1 is greater than 2 or 4") : print("1 is less than 2")
+
 
 /**
  * ---------------------------------------------------------------------------------
@@ -108,12 +111,13 @@ if (1 > 2 || 1 > 4) && true == true {
  *   ==   `equal`
  *   ===  `identical to`
  *   !==  `not identical to`
+ *   ??   `the null coalescing operator`
  *
  *   note that “identical to” (represented by three equals signs, or ===) 
  *   does not mean the same thing as “equal to” (represented by two equals signs, or ==):
- *   “Identical to” means that two constants or variables of class type 
+ *   “identical to” means that two constants or variables of class type 
  *   refer to exactly the same class instance.
- *   “Equal to” means that two instances are considered “equal” or “equivalent” in value
+ *   “equal to” means that two instances are considered “equal” or “equivalent” in value
  * 
  */
 
@@ -400,6 +404,11 @@ if let twoAsInt = dictionary["two"] {
 
 // unwaraping the optional using the forced value operator (!)
 dictionary["one"]! // 1
+
+// nil-Coalescing operator ??
+value = dictionary["one"] ?? "OK"
+// the same as doing
+value != nil ? dictionary["one"]! : "OK"
 
 // simplest way to add a value to a dictionary is by using the subscript syntax:
 var stringsAsInts: [String: Int] = [
