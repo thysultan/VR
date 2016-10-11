@@ -105,7 +105,7 @@ if ((1 > 2 || 1 > 4) && true == true) {
  *   !=  `not identical to`
  *   !==   `not equal`
  *   ===   `equal`
- *
+ *   ?    `conditional (ternary) operator`
  * 
  */
 

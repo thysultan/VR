@@ -113,6 +113,7 @@ if (1 > 2 || 1 > 4) && true == true {
  *   ===  `identical to`
  *   !==  `not identical to`
  *   ??   `the null coalescing operator`
+ *   ?    `conditional (ternary) operator`
  *
  *   note that “identical to” (represented by three equals signs, or ===) 
  *   does not mean the same thing as “equal to” (represented by two equals signs, or ==):
