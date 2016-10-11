@@ -7,7 +7,7 @@
  */
 
  
-// Int, Bool, String, Double, Any, Float, Void, Array, Tuple, () -> T, Generic Types <T>
+// Int, Bool, String, Double, Any, Float, Void, Array, Tuple, () -> T, Character, Generic Types <T>
 
  
 /**
@@ -28,6 +28,7 @@ var fn: () -> Int     = func foo() -> Int {}
 var arr: [String]     = ["String 1", "String 2"]
 var tpl: Tuple        = (name: "Sultan", age: 25)
 var gen: T?                                       // generic type
+var char: Character   = "A"
 
 
 /**
