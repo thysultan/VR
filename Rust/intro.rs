@@ -98,7 +98,9 @@ if (1 > 2 || 1 > 4) && true == true {
  *   >    `greater than` 
  *   <=   `less than or equal to`
  *   >=   `greater than or equal to`
- *   !    `negation' i.e !true == false
+ *   !    `NOT`
+ *   &&   `AND`
+ *   ||   `OR`
  *   %    `modulas`
  *   +    `addition`
  *   -    `subtraction`
