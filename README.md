@@ -20,6 +20,8 @@ that address the particular opertation in question.
 
 - Rust
 - GO
+- C++
+- WebAssembly (through C++)
 
 Open to pull requests for other Languages listed or not listed in the list of current implementations or roadmap. 
 The only contributing guide is to include a `intro.ext` file
