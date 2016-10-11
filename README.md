@@ -19,7 +19,7 @@ that address the particular opertation in question.
 
 ### Implementations Roadmap
 
-- GO
+- GO (in progress)
 - C++
 - WebAssembly (through C++)
 
