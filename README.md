@@ -15,10 +15,10 @@ that address the particular opertation in question.
 
 - Swift
 - Javascript
+- Rust
 
 ### Implementations Roadmap
 
-- Rust (in progress)
 - GO
 - C++
 - WebAssembly (through C++)

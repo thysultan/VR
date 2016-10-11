@@ -56,7 +56,7 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 			patchProps(currentNode, oldNode)
 		}
 
-		var currentChildren: [VNode] = currentNode.children
+		let currentChildren: [VNode] = currentNode.children
 		var oldChildren: [Vnode] = oldName.children
 
 		var newLength: Int = currentChildren.count
@@ -130,11 +130,11 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 // patch props
 func patchProps (newNode: VNode, oldNode: VNode) {
 	var diff: [Any] = diffProps(newNode.props, oldNode.props)
-	var length: Int = diff.count
+	let length: Int = diff.count
 
 	if length != 0 {
 		for var i = 0; i < length; i = i + 1 {
-			var prop = diff[i]
+			let prop = diff[i]
 
 			// patchProp calls native api(s)
 			patchProp(oldNode, prop[0], prop[1], prop[2], prop[3])
@@ -147,7 +147,7 @@ func patchProps (newNode: VNode, oldNode: VNode) {
 // diff props
 func diffProps (newProps: [String: Any], oldProps: [String: Any]) -> [Any] {
 	var diff: [Any] = []
-	var NS: Any = oldProps.xmlns
+	let NS: String = oldProps.xmlns
 
 	for (newName, newValue) in newProps {
 	    diff += diffNewProps(newProps, oldProps, newName, newValue, NS)
@@ -180,7 +180,7 @@ func diffNewProps (newProps: [String: Any], oldProps: [String: Any], newName: St
 }
 
 // diff old props
-func diffOldProps (newProps: [String: Any], oldProps: [String: Any], oldName: String, oldValue: String, NS: String) -> [Any] {
+func diffOldProps (newProps: [String: Any], oldProps: [String: Any], oldName: String, oldValue: Any, NS: String) -> [Any] {
 	var diff: [Any] = []
 
 	if newProps[oldName] == nil {

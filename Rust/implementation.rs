@@ -2,6 +2,9 @@
  * Rust implementation
  */
 
+use std::any::Any;
+use std::collections::HashMap;
+
 struct VNode {
     nodeType: i32,
     nodeName: <Any>,
@@ -14,7 +17,7 @@ fn Node (nodeType: i32, nodeName: <Any>, props: HashMap<&str, <Any>>, children: 
 }
 
 // an emptyNode
-let emptyNode: VNode = Node(0, "", (::std::collections::HashMap::new()), [i32; 0]);
+let emptyNode: VNode = Node(0, "", HashMap::new(), [i32; 0]);
 
 fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 	// remove
@@ -55,8 +58,11 @@ fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 			patchProps(currentNode, oldNode);
 		}
 
-		let mut newLength: i32 = currentNode.children.len()
-		let mut oldLength: i32 = oldNode.children.len()
+		let mut currentChildren = &currentNode.children[..];
+		let mut newChildren = &currentNode.children[..];
+
+		let mut newLength: i32 = currentChildren.len();
+		let mut oldLength: i32 = oldChildren.len();
 
 		if newLength == 0 {
 			// but only if old children is not already cleared
@@ -66,9 +72,8 @@ fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 				oldNode.children = currentNode.children;
 			}
 		} else {
-			let mut deleteCount: i32 = 0l
+			let mut deleteCount: i32 = 0;
 
-			// classic c-lang like for-loop impl
 			// initialization
 			let mut i: i32 = 0;
 
@@ -82,7 +87,7 @@ fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 			    let oldChild: <VNode>;
 
 			    if newLength >= i { // currentNode's children has an element at that index
-			    	newChild = currentNode.children[i];
+			    	newChild = currentChildren[i];
 			    } else { // element does not exist, assign an emptyNode
 			    	newChild = emptyNode;
 			    }
@@ -103,14 +108,14 @@ fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 			    	    1 => { 
 			    	    	// removeNode calls native api(s)
 			    	    	removeNode(oldNode, index);
-			    	    	oldchildren.remove(index);
+			    	    	oldChildren.remove(index);
 			    	    	deleteCount = deleteCount + 1;
 			    	    }
 			    	    // add operation
 			    	    2 => {
 			    	    	// addNode calls native api(s)
 			    	    	addNode(oldNode, newChild, index);
-			    	    	oldchildren.insert(index, newChild);
+			    	    	oldChildren.insert(index, newChild);
 			    	    	deleteCount = deleteCount - 1;
 			    	    },
 			    	    // text operation
@@ -122,8 +127,8 @@ fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 			    	    // replace operation
 			    	    4 => {
 			    	    	// replaceNode calls native api(s)
-			    	    	replaceNode(newChild, oldChild)
-			    	    	oldchildren[index] = newChild
+			    	    	replaceNode(newChild, oldChild);
+			    	    	oldChild.children[index] = newChild;
 			    	    },
 			    	    // key operation
 			    	    5 => {
@@ -137,3 +142,94 @@ fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 
 	return 0;
 }
+
+// patch props
+fn patchProps (newNode: <VNode>, oldNode: <VNode>) -> () {
+	let diff: Vec<Any> = diffProps(newNode.get("props"), oldNode.get("props"));
+	let length: i32 = diff.len();
+
+	if length != 0 {
+
+		// initialization
+		let mut i: i32 = 0;
+
+		loop {
+			// increment
+		    i += 1;
+		    // condition
+		    if i < length { break; }
+
+		    let prop = diff[i];
+
+			// patchProp calls native api(s)
+			patchProp(oldNode, prop[0], prop[1], prop[2], prop[3]);
+		}
+
+		oldNode.props = newNode.props;
+	}
+}
+
+// diff props
+fn diffProps (newProps: HashMap<&str, <Any>>, oldProps: HashMap<&str, <Any>>) -> Vec<Any> {
+	let mut diff: Vec<Any> = vec![];
+	let NS: &str;
+
+	match oldProps.get("xmlns") {
+	    Some(value) => { NS = value; }
+	    None => { NS = (); }
+	}
+
+	for (newName, newValue) in newProps.iter() {
+		diff.append(&mut diffNewProps(newProps, oldProps, newName, newValue, NS));
+	}
+
+	for (oldName, oldValue) in oldProps.iter() {
+		diff.append(&mut diffoldProps(newProps, oldProps, oldName, oldValue, NS));
+	}
+
+	return diff;
+}
+
+// diff new props
+func diffNewProps (newProps: HashMap<&str, <Any>>, oldProps: HashMap<&str, <Any>>, newName: &str, newValue: &str, NS: &str) -> Vec<Any> {
+	let mut diff: Vec<Any> = vec![];
+	let mut oldValue: <Any>;
+
+	// if the newProp's key is in oldProps assign oldValue to it
+	match oldProps.get(newName) {
+	    Some(value) => { oldValue = value; }
+	    None => { oldValue = (); }
+	}
+
+	if newValue != nil && oldValue !== newValue) {
+		diff.append(["setAttribute", newName, newValue, NS]);
+	}
+
+	return diff
+}
+
+// diff old props
+fn diffOldProps (newProps: HashMap<&str, <Any>>, oldProps: HashMap<&str, <Any>>, oldName: &str, oldValue: <Any>, NS: &str) -> Vec<Any> {
+	let mut diff: Vec<Any> = vec![];
+
+	match newProps.get(oldName) {
+	    Node => {
+	    	diff.append(["removeAttribute", newName, newValue, NS]);
+	    }
+	}
+
+	return diff;
+}
+
+
+// a text node
+let mut textNode = Node(3, "Text", HashMap::new(), ["Hello World"]);
+
+let props = HashMap::new();
+props.insert("state", "active");
+
+// an element node NavBar with one single child TextNode
+let mut oldNode = Node(1, "NavBar", props, [textNode]);
+let mut newNode = Node(1, "NavBar", props, [textNode]);
+
+reconciler(newNode, oldNode);

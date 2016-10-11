@@ -194,7 +194,8 @@ let value  = strs[0];        // "A"
 let slice  = &str[1 .. 2];   // ["B", "C"]
 let slice: [&str] = &strs;   // ["A", "B", "C"]
 
-// all of the above arrays are all immutable, below are mutable arrays called vectors
+// all of the above arrays are all immutable length arrays, 
+// vectors are what you would use for arrays of changine length
 let mut ints: Vec<&i32>  = vec![1, 2, 3];
 let mut strs: Vec<&str>  = vec!["A", "B", "C"];
 let mut buls: Vec<&bool> = vec![true, false, true];
@@ -209,6 +210,7 @@ let mut flts = vec![1.0, 2.0, 3.0];
 str.append("D")             // str => ["A", "B", "C", "D"]
 str.insert(1, "F")          // str => ["A", "F", "B", "C", "D"]
 
+// concatenation
 let str2: Vec<&str> = vec![4, 5, 6];
 str.append(&mut str2);     // ints => [1, 2, 3, 4, 5, 6]
 
@@ -224,7 +226,6 @@ println!("Item 7 is {}", v[7]);
 
 // If you want to handle out-of-bounds errors without panicking, 
 // you can use methods like get or get_mut that return None when given an invalid index:
-
 let v = vec![1, 2, 3];
 match v.get(7) {
     Some(x) => println!("Item 7 is {}", x),
@@ -268,7 +269,6 @@ fn toUpperCase(str: &str, num: &i32, arr: Vec<&str>) -> &str {
 
 // rust has special syntax for ‘diverging functions’, 
 // which are functions that do not return:
-
 fn doesNotReturn() -> ! {
     println!("this function never returns!");
 }
