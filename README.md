@@ -18,7 +18,7 @@ that address the particular opertation in question.
 
 ### Implementations Roadmap
 
-- Rust
+- Rust (in progress)
 - GO
 - C++
 - WebAssembly (through C++)
