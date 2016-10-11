@@ -370,7 +370,10 @@ print(result)
 // each value is associated with a unique key, which acts as an identifier for 
 // that value within the dictionary
 
-// syntax([KeyType: ValueType]) i.e [key:value, key:value, ...]
+// syntax([KeyType: ValueType]) i.e 
+// var foo = [key: value, key: value, ...] or 
+// var foo: [String: String] = [key: value, key: value, ...] or 
+// var foo: Dictionary<String, String> = [key: value, key: value, ...]
 
 var dictionary: [String: Int] = [
     "one" : 1,
