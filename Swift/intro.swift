@@ -7,7 +7,7 @@
  */
 
  
-// Int, Bool, String, Double, Any, Float, Void, Array, Tuple, () -> T
+// Int, Bool, String, Double, Any, Float, Void, Array, Tuple, () -> T, <T>
 
  
 /**
@@ -27,6 +27,7 @@ var intOpt:Int?       = 42 // Optional Int -> intOpt! to access value
 var fn: () -> Int     = func foo() -> Int {}
 var arr: [String]     = ["String 1", "String 2"]
 var tpl: Tuple        = (name: "Sultan", age: 25)
+var gen: T? // generic type
 
 
 /**
