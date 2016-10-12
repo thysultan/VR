@@ -60,9 +60,11 @@ bar = 1
 
 /**
  * if (`CONDITION`) { 
- *  	`STATEMENT(s)`
+ *      `STATEMENT(s)`
+ * } else if (`CONDITION`) { 
+ *      `STATEMENT(s)`
  * } else { 
- * 		`STATEMENT(s)`
+ *      `STATEMENT(s)`
  * }
  */
  

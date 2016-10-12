@@ -31,7 +31,8 @@ let mut arr: Vec<&str> = vec!["String 1", "String 2", "String 3"]; // a dynamic 
 let mut arr:           = vec!["String 1", "String 2", "String 3"]; // same thing
 let tpl: (i32, &str)   = (1, "hello");
 let tpl                = (1, "hello"); // ^ same thing
-let fc: fn(i32) -> i32 = foo;
+let fc: fn(i32) -> i32 = fn() -> i32 { return 0; };
+let fc                 = fn() -> i32 { return 0; }; // ^ same thing
 
 // you can also use <T: Type> to case a custom type
 // for example <T: Any>
@@ -53,6 +54,12 @@ let mut bar: i32 = 1; // mutable
 // Error! The type of a variable can't be changed
 bar = true;
 
+// OK!
+bar = false;
+
+// Error! The foo is not mutable
+foo = 2;
+
 
 /**
  * ---------------------------------------------------------------------------------
@@ -65,9 +72,11 @@ bar = true;
 
 /**
  * if `CONDITION`{ 
- *  	`STATEMENT(s)`
+ *      `STATEMENT(s)`
+ * } else if `CONDITION` { 
+ *      `STATEMENT(s)`
  * } else { 
- * 		`STATEMENT(s)`
+ *      `STATEMENT(s)`
  * }
  */
  
@@ -133,7 +142,7 @@ if (1 > 2 || 1 > 4) && true == true {
   */
 
 
-var i = 1
+let i = 1
 while i <= 10 {
     println!(i);
     i = i + 1;

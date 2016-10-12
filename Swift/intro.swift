@@ -20,12 +20,12 @@ var integer: Int      = Int(double)
 var boolean: Bool     = true
 var double: Double    = 7.2320430234 
 var double: Double    = Double(integer)
-var float: Fouble     = 7.2
-var float: Fouble     = Float(integer)
+var float: Float      = 7.2
+var float: Float      = Float(integer)
 var string: String    = "String"                  // uses double "" tick
 var any: Any?         = nil                       // ? indicates the value could be nil
-var fn: () -> Int     = func foo() -> Int {}
-var arr: [String]     = ["String 1", "String 2"]
+var fn: () -> Int     = func foo() -> Int { return 0 }
+var arr: [String]     = ["String 1", "String 2"]  // array of strings
 var tpl: Tuple        = (name: "Sultan", age: 25)
 var gen: T?                                       // generic type
 var char: Character   = "A"
@@ -45,9 +45,13 @@ var char: Character   = "A"
 var foo: Int = 1 // mutable
 let bar: Int = 1 // immutable
 
+// Error! The bar is not mutable
+bar = 2
+
 // Error! The type of a variable can't be changed
 foo = true
 
+// OK!
 var foo: Any = 1
 
 // Ok!
@@ -66,9 +70,11 @@ foo = true
 
 /**
  * if `CONDITION`{ 
- *  	`STATEMENT(s)`
+ *      `STATEMENT(s)`
+ * } else if `CONDITION` { 
+ *      `STATEMENT(s)`
  * } else { 
- * 		`STATEMENT(s)`
+ *      `STATEMENT(s)`
  * }
  */
  
