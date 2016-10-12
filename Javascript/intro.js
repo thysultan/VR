@@ -187,7 +187,7 @@ var strs           = ["A", "B", "C"]
 var buls           = [true, false, true]
 var dbls           = [1.0, 2.0, 3.0]
 
-var length = strs.length      // 2
+var length = strs.length      // 3
 var value  = strs[0]          // "A"
 var slice  = strs.slice(1)    // ["B", "C"]
 

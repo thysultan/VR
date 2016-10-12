@@ -241,10 +241,7 @@ var strs: [String] = ["A", "B", "C"]
 var buls: [Bool]   = [true, false, true]
 var dbls: [Double] = [1.0, 2.0, 3.0]
 
-// initialize an empty array
-var empty: [Any]()
-
-var length = strs.count     // 2
+var length = strs.count     // 3
 var value  = strs[0]        // "A"
 var slice  = str[1...2]     // ["B", "C"]
 

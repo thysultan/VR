@@ -193,7 +193,7 @@ let strs: [&str; 3] = ["A", "B", "C"];
 let buls: [bool; 3] = [true, false, true];
 let flts: [f64; 3]  = [1.0, 2.0, 3.0];
 
-let length = strs.len();     // 2
+let length = strs.len();     // 3
 let value  = strs[0];        // "A"
 
 // slices point to a section of an array
@@ -201,7 +201,7 @@ let slice  = &str[1 .. 2];   // ["B", "C"]
 let slice: [&str] = &strs;   // ["A", "B", "C"]
 
 // all of the above arrays are all immutable length arrays, 
-// vectors are what you would use for arrays of changine length
+// vectors are what you would use for arrays of varying length
 let mut ints: Vec<&i32>  = vec![1, 2, 3];
 let mut strs: Vec<&str>  = vec!["A", "B", "C"];
 let mut buls: Vec<&bool> = vec![true, false, true];

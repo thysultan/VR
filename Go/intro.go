@@ -189,6 +189,40 @@ for var i = 10; i > 0; --i {
  */
 
 
+var ints [3]int     = {1, 2, 3}
+var strs [3]string  = {"A", "B", "C"}
+var buls [3]bool    = {true, false, true}
+var dbls [3]float64 = {1.0, 2.0, 3.0}
+
+// all of the above arrays are all immutable length arrays, 
+// slices are what you would use for arrays of varying length
+// a slice is declared just like an array except we leave out the element count
+var ints []int     = {1, 2, 3}
+var strs []string  = {"A", "B", "C"}
+var buls []bool    = {true, false, true}
+var dbls []float64 = {1.0, 2.0, 3.0}
+
+var length = len(strs)                 // 3
+var value = strs[0]                    // "A"
+var slice = str[1:2]                   // ["B", "C"]
+
+
+str = append(str, "D")                 // str => ["A", "B", "C", "D"]
+
+str = append(str, 0)
+copy(str[1+1:], s[1:])
+s[1] = "F"                             // str => ["A", "F", "B", "C", "D"]
+
+var ints2 []int = {4, 5, 6}
+
+ints = append(ints, ints2...)          // ints => [1, 2, 3, 4, 5, 6]
+ints = append(ints, []int{4, 5, 6}...) // ints => [1, 2, 3, 4, 5, 6]
+
+buls = append(buls[:0], buls[0+1:]...) // buls => [false, true]
+
+dbls[2] = 4.0                          // dbls => [1.0, 2.0, 4.0]
+
+
 /**
  * ---------------------------------------------------------------------------------
  * 
