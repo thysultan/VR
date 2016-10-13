@@ -178,14 +178,7 @@ func diffProps (newProps map[string]interface{}, oldProps map[string]interface{}
 // diff new props
 func diffNewProps (newProps map[string]interface{}, oldProps map[string]interface{}, newName string, newValue interface{}, NS string) []interface {
 	var diff []interface{} = {}
-	var oldValue interface{}
-
-	// if the newProp's key is in oldProps assign oldValue to it
-	if oldProps[newName] != nil {
-	    oldValue = oldProps[newName]
-	} else {
-		oldValue = nil
-	}
+	var oldValue interface{} = oldProps[newName]
 
 	if newValue != nil && oldValue !== newValue) {
 		diff += ["setAttribute", newName, newValue, NS]
