@@ -137,7 +137,7 @@ func patchProps (newNode: VNode, inout oldNode: VNode) {
 	let length: Int = diff.count
 
 	if length != 0 {
-		for var i = 0; i < length; i = i + 1 {
+		for var i: Int = 0; i < length; i = i + 1 {
 			let prop = diff[i]
 
 			// patchProp calls native api(s)
