@@ -16,11 +16,11 @@ that address the particular opertation in question.
 - Swift
 - Javascript
 - Rust
+- GO
 
 ### Implementations Roadmap
 
-- GO (in progress)
-- C++
+- C++ (in progress)
 - WebAssembly (through C++)
 
 Open to pull requests for other Languages listed or not listed in the list of current implementations or roadmap. 
