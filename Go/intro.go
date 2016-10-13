@@ -206,21 +206,30 @@ var length = len(strs)                 // 3
 var value = strs[0]                    // "A"
 var slice = str[1:2]                   // ["B", "C"]
 
+strs = append(str, "D")                 // str => ["A", "B", "C", "D"]
 
-str = append(str, "D")                 // str => ["A", "B", "C", "D"]
+// insert
+// 1. make sure there is enough room
+strs = append(strs, 0)
+// 2. move all elements of strs up one slot
+copy(strs[1+1:], strs[1:])             // format -> copy(str[i+1:], s[i:])
+// insert the new element at the now free position
+strs[1] = "F"                          // str => ["A", "F", "B", "C", "D"]
 
-str = append(str, 0)
-copy(str[1+1:], s[1:])
-s[1] = "F"                             // str => ["A", "F", "B", "C", "D"]
+// concatenation
+var ints2 []int = {4, 5, 6} // the slice to concatenate
+var ints []int = append(ints, ints2...)          // ints => [1, 2, 3, 4, 5, 6]
+var ints []int = append(ints, []int{4, 5, 6}...) // ints => [1, 2, 3, 4, 5, 6]
 
-var ints2 []int = {4, 5, 6}
+// move all elements of buls down one slot
+copy(buls[0:], buls[0+1:]) // format -> copy(buls[i:], buls[i+1:])
+// assign nil to element to remove
+buls[len(buls)-1] = nil
+// remove element
+buls = buls[:len(buls)-1]                        // buls => [false, true]
 
-ints = append(ints, ints2...)          // ints => [1, 2, 3, 4, 5, 6]
-ints = append(ints, []int{4, 5, 6}...) // ints => [1, 2, 3, 4, 5, 6]
-
-buls = append(buls[:0], buls[0+1:]...) // buls => [false, true]
-
-dbls[2] = 4.0                          // dbls => [1.0, 2.0, 4.0]
+// assignment
+dbls[2] = 4.0                                    // dbls => [1.0, 2.0, 4.0]
 
 
 /**
@@ -233,6 +242,50 @@ dbls[2] = 4.0                          // dbls => [1.0, 2.0, 4.0]
 
 
 /**
+ * general syntax
+ * 
+ * func name(list of parameters) return type {
+ * 		statements
+ * }
+ *
+ * // some functions don’t return any values
+ * 
+ * func name(list of parameters) {
+ * 		statements
+ * }
+ *
+ * // parameters are followed by their type.
+ */
+
+
+/**
+ * @examples
+ */
+
+
+func toUpperCase (str string, num int, arr string) string {
+	return str
+}
+
+// which you can call the function like
+toUpperCase("A String", 10, ["String"])
+
+// where () is a tuple, an empty tuple that represents the Void type
+func doNothing () -> () {
+	print("nothing")
+}
+
+// even though golang does not have tuples
+// functions can return multiple values
+func countdown() (int, int) {
+	return 1, 2
+}
+
+// use case
+var a, b = countdown() // a => 1, b => 2
+
+
+/**
  * ---------------------------------------------------------------------------------
  * 
  * @dictionaries
@@ -240,15 +293,47 @@ dbls[2] = 4.0                          // dbls => [1.0, 2.0, 4.0]
  * ---------------------------------------------------------------------------------
  */
 
+// A dictionary is a container that stores multiple values of the same type. 
+// each value is associated with a unique key, which acts as an identifier for 
+// that value within the dictionary
 
-/**
- * ---------------------------------------------------------------------------------
- * 
- * @tuples
- * 
- * ---------------------------------------------------------------------------------
- */
+// syntax(map[`KeyType`]`ElementType`) i.e 
+// var foo: map[string]int = {key: value}
 
+var dictionary: map[string]int = {
+    "one": 1,
+    "two": 2,
+    "three": 3
+}
+
+var emptyDictionary: map[int]int = {}
+
+// access specific elements using subscript syntax, 
+// pass the key of the value within square brackets immediately after name of dictionary. 
+dictionary["one"] // 1
+
+// simplest way to add a value to a dictionary is by using the subscript syntax:
+var stringsAsInts: map[string]int = {
+    "zero": 0,
+    "one": 1,
+    "two": 2
+}
+
+// adds a new key->value pair to the dictionary
+stringsAsInts["three"] = 3
+
+// using the subscript syntax you can change a value associated with a key:
+stringsAsInts["three"] = 10
+
+// to remove a value from the dictionary 
+delete(dictionary, "three")
+
+// to iterate over the dictionary
+// NOTE: the := syntax is short that you can use withint function scope
+// to declare and assign variables, i.e var num int = 1, could be num := 1
+for key, value := range stringsAsInts {
+    fmt.Println("key: {} val: {}", key, val)
+}
 
 /**
  * ---------------------------------------------------------------------------------
@@ -258,3 +343,38 @@ dbls[2] = 4.0                          // dbls => [1.0, 2.0, 4.0]
  * ---------------------------------------------------------------------------------
  */
 
+
+// syntax begins with the `struct` keyword followed by the `name` and a pair of curly braces. 
+// everything in-between the curly braces is a `member` of the struct.
+struct Location {
+	let latitude: Double
+	let longitude: Double
+}
+
+type Location struct {
+	latitude float64
+	longitude float64
+}
+
+// you can instantiate one and store it in a constant or variable like any other type
+var pizzaLocation Location = Location{44.9871, -93.2758}
+
+// nested structs
+type DeliveryRange struct {
+	range float64
+	center Location
+}
+
+var storeLocation Location = Location(44.9871, -93.2758)
+var pizzaRange DeliveryRange = DeliveryRange(200, storeLocation)
+
+// access
+fmt.Println(pizzaRange.range)           // => 200
+
+// since pizzaRange.center is a Location struct
+fmt.Println(pizzaRange.center.latitude) // => 44.9871
+
+// re-assign
+pizzaRange.range = 250
+
+// ...

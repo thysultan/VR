@@ -245,15 +245,20 @@ var length = strs.count     // 3
 var value  = strs[0]        // "A"
 var slice  = str[1...2]     // ["B", "C"]
 
+// add
 str.append("D")             // str => ["A", "B", "C", "D"]
 str.insert("F", atIndex: 1) // str => ["A", "F", "B", "C", "D"]
 
+// concatenation
 ints += [4, 5, 6]           // ints => [1, 2, 3, 4, 5, 6]
 
+// delete
 buls.removeAtIndex(0)       // buls => [false, true]
 
+// assignment
 dbls[2] = 4.0               // dbls => [1.0, 2.0, 4.0]
 
+// replace
 var ints: [Int] = [1, 2, 3, 4, 5, 6]
 ints[2...4]     = [0, 0]    // ints => [1, 2, 0, 0, 6]
 ints[2...4]     = [0, 0, 0] // ints => [1, 2, 0, 0, 0]
@@ -289,7 +294,7 @@ ints[2...4]     = [0, 0, 0] // ints => [1, 2, 0, 0, 0]
  */
 
 func toUpperCase (str: String, num: Int, arr: [String]) -> String {
-	return str;
+	return str
 }
 
 // which you can call the function like
@@ -297,19 +302,19 @@ toUpperCase("A String", 10, ["String"]);
 // or
 toUpperCase("A String", num: 10, arr: ["String"])
 
-// where () is a tuple, though an empty tuple in this case representing the Void type
+// where () is a tuple, an empty tuple that represents the Void type
 func doNothing () -> () {
-	print("nothing");
+	print("nothing")
 }
 
 // one could write the same thing as
 func doNothing () {
-	print("nothing");
+	print("nothing")
 }
 
 // default parameters
 func countdown(from: Int, to: Int = 1) {
-	print(from + to);
+	print(from + to)
 }
 countdown(5, to: 3)
 
@@ -318,7 +323,7 @@ countdown(5, to: 3)
 // to stop this from happening write an underline (_) 
 // before the parameter with default value.
 func countdown(from: Int, _ to: Int = 1) {
-	print(from + to);
+	print(from + to)
 }
 countdown(5, 3)
 
@@ -385,9 +390,9 @@ print(result)
 // var foo: Dictionary<String, String> = [key: value, key: value, ...]
 
 var dictionary: [String: Int] = [
-    "one" : 1,
-    "two" : 2,
-    "three" : 3
+    "one": 1,
+    "two": 2,
+    "three": 3
 ]
 
 var emptyDictionary: [Int: Int] = [:]
@@ -417,9 +422,9 @@ value != nil ? dictionary["one"]! : "OK"
 
 // simplest way to add a value to a dictionary is by using the subscript syntax:
 var stringsAsInts: [String: Int] = [
-    "zero" : 0,
-    "one" : 1,
-    "two" : 2
+    "zero": 0,
+    "one": 1,
+    "two": 2
 ]
 
 // adds a new key->value pair to the dictionary
@@ -432,9 +437,9 @@ stringsAsInts["three"] = 10
 // you can use the subscript syntax to set the value to nil
 stringsAsInts["three"] = nil
 
-// to iterate over the dictionaryyou could do
+// to iterate over the dictionary
 for (key, value) in stringsAsInts {
-
+    print("key: {} val: {}", key, val)
 }
 
 

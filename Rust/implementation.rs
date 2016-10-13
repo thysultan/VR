@@ -7,12 +7,12 @@ use std::collections::HashMap;
 
 struct VNode {
     nodeType: i32,
-    nodeName: <Any>,
+    type: <Any>,
     props: HashMap<&str, <Any>>,
     children: Vec<Any>
 }
 
-fn Node (nodeType: i32, nodeName: <Any>, props: HashMap<&str, <Any>>, children: Vec<VNode>) -> VNode {
+fn Node (nodeType: i32, type: <Any>, props: HashMap<&str, <Any>>, children: Vec<VNode>) -> VNode {
 	return VNode(nodeType, type, props, children);
 }
 
@@ -40,12 +40,12 @@ fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 		return 5;
 	}
 	// replace
-	else if (newNode.nodeName !== oldNode.nodeName) {
+	else if (newNode.type !== oldNode.type) {
 		return 4;
 	}
 	// recursive
 	else {
-		// extractNode will handle when newNode.nodeName is a component constructor instead of a string
+		// extractNode will handle when newNode.type is a component constructor instead of a string
 		let currentNode: VNode = extractNode(newNode);
 
 		// identical, exit early

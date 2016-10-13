@@ -4,13 +4,13 @@
 
 struct VNode {
 	let nodeType: Int // immutable
-	let nodeName: Any     // immutable, String or Function
+	let type: Any     // immutable, String or Function
 	var props: [String: Any] // dictionary
 	var children: [Any] // mmutable
 }
 
-func Node (nodeType: Int, nodeName: Any, props: [String: Any], children: [VNode]) -> VNode {
-	return VNode(nodeType: nodeType, nodeName: nodeName, props: props, children: children);
+func Node (nodeType: Int, type: Any, props: [String: Any], children: [VNode]) -> VNode {
+	return VNode(nodeType: nodeType, type: type, props: props, children: children);
 }
 
 // an emptyNode
@@ -38,12 +38,12 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 		return 5
 	}
 	// replace
-	else if newNode.nodeName != oldNode.nodeName {
+	else if newNode.type != oldNode.type {
 		return 4
 	}
 	// recursive
 	else {
-		// extractNode will handle when newNode.nodeName is a component constructor instead of a string
+		// extractNode will handle when newNode.type is a component constructor instead of a string
 		var currentNode: VNode = extractNode(newNode)
 
 		// identical, exit early

@@ -213,6 +213,7 @@ let mut strs = vec!["A", "B", "C"];
 let mut buls = vec![true, false, true];
 let mut flts = vec![1.0, 2.0, 3.0];
 
+// add
 str.append("D")             // str => ["A", "B", "C", "D"]
 str.insert(1, "F")          // str => ["A", "F", "B", "C", "D"]
 
@@ -220,7 +221,9 @@ str.insert(1, "F")          // str => ["A", "F", "B", "C", "D"]
 let str2: Vec<&str> = vec![4, 5, 6];
 str.append(&mut str2);     // ints => [1, 2, 3, 4, 5, 6]
 
+// delete
 buls.remove(0);            // buls => [false, true]
+// assignment
 flts[2] = 4.0              // flts => [1.0, 2.0, 4.0]
 
 // trying to access an index that does not exist
@@ -230,7 +233,7 @@ println!("Item 7 is {}", v[7]);
 // then the current thread will panic with a message like this:
 // thread 'main' panicked at 'index out of bounds: the len is 3 but the index is 7'
 
-// If you want to handle out-of-bounds errors without panicking, 
+// if you want to handle out-of-bounds errors without panicking, 
 // you can use methods like get or get_mut that return None when given an invalid index:
 let v = vec![1, 2, 3];
 match v.get(7) {
@@ -337,7 +340,7 @@ contacts.insert("three", 10);
 // you can use the .remove method on the dictionary
 stringsAsInts.remove("The Adventures of Sherlock Holmes");
 
-// to iterate over the dictionary you could do
+// to iterate over the dictionary
 for (key, val) in stringsAsInts.iter() {
     println!("key: {} val: {}", key, val);
 }
