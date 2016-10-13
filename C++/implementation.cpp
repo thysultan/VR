@@ -6,7 +6,7 @@
 #include <string>
 #include <unordered_map>
 
-// so we can do unordered_map instead of std::unordered_map
+// std::unordered_map --> unordered_map
 using namespace std;
 
 template <typename Any>
@@ -17,6 +17,9 @@ struct VNode {
 	unordered_map<string, Any> props;
 	vector<Any> children;
 };
+
+// an emptyNode
+Vnode emptyNode = Node(0, "", unordered_map<string, Any>{}, vector<Any>{})
 
 int reconciler (VNode newNode, VNode *oldNode) {
 	if (newNode.nodeType == 0) {
@@ -195,3 +198,12 @@ vector<Any> diffOldProps (unordered_map<string, Any> newProps, unordered_map<str
 
 	return diff;
 }
+
+
+// a text node
+Vnode textNode = Node(3, "Text", unordered_map<string, Any>{}, []interface{}{"Hello World"})
+// an element node NavBar with one single child TextNode
+Vnode oldNode = Node(1, "NavBar", unordered_map<string, Any>{"state": "active"}, vector<Any>{textNode})
+Vnode newNode = Node(1, "NavBar", unordered_map<string, Any>{"state": "active"}, vector<Any>{textNode})
+
+reconciler(newNode, oldNode);
