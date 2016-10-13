@@ -60,7 +60,7 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 		var oldChildren: [Vnode] = oldName.children
 
 		var newLength: Int = currentChildren.count
-		var oldLength: Int = currentChildren.count
+		var oldLength: Int = oldChildren.count
 
 		// remove all children
 		if newLength == 0 {

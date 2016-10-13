@@ -14,6 +14,7 @@
 // uint, uint8, uint16, uint32, uint64, uintptr
 // float32, float64
 // byte
+// interface{}, the <Any> type in go
 // when you need an integer value you should use int 
 // unless you have a specific reason to use a sized or unsigned integer type.
 
@@ -26,7 +27,7 @@ var double float64    = float64(integer)
 var float float32     = 7.2
 var float float32     = float32(integer)
 var string string     = "String"                  // uses double "" tick
-var any interface{}   = nil
+var any interface{}   = nil // interface{} is <Any> type
 var fn func() int     = func () int { return 0 }
 var arr [2]string     = ["String 1", "String 2"]
 var char rune         = '⌘' // a rune with integer value 0x2318, uses single ''tick
@@ -412,8 +413,8 @@ type DeliveryRange struct {
 	center Location
 }
 
-var storeLocation Location = Location(44.9871, -93.2758)
-var pizzaRange DeliveryRange = DeliveryRange(200, storeLocation)
+var storeLocation Location = Location{44.9871, -93.2758}
+var pizzaRange DeliveryRange = DeliveryRange{200, storeLocation}
 
 // access
 fmt.Println(pizzaRange.range)           // => 200
@@ -447,8 +448,8 @@ func (this DeliveryRange) isInRange(customer: Location) bool {
 }
 
 // instantiate
-var ranger DeliveryRange = DeliveryRange(150, Location("44.9871,-93.2758"))
-var customer Location = Location(coordinateString: "44.9850,-93.2750")
+var ranger DeliveryRange = DeliveryRange{150, Location{"44.9871,-93.2758"}}
+var customer Location = Location{"44.9850,-93.2750"}
  
 // call method
 ranger.isInRange(customer) // => true!

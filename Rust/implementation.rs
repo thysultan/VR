@@ -12,8 +12,9 @@ struct VNode {
     children: Vec<Any>
 }
 
-fn Node (nodeType: i32, type: <Any>, props: HashMap<&str, <Any>>, children: Vec<VNode>) -> VNode {
-	return VNode(nodeType, type, props, children);
+// type is a reserved word in rust, thus the _type
+fn Node (nodeType: i32, _type: <Any>, props: HashMap<&str, <Any>>, children: Vec<VNode>) -> VNode {
+	return VNode(nodeType, _type, props, children);
 }
 
 // an emptyNode
