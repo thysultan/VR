@@ -363,8 +363,16 @@ toUpperCase("A String", 10, ["String"]);
 // each value is associated with a unique key, which acts as an identifier for 
 // that value within the dictionary
 
+// NOTE: the use declaration can be used to bind a full path to a new name, for easier access.
+// bind the `deeply::nested::function` path to `other_function`.
+use std::any::Any;
+use std::collections::HashMap;
+
+// without which the below would be
+// let mut dictionary = std::collections::HashMap::new();
+
 // create
-let mut dictionary = ::std::collections::HashMap::new();
+let mut dictionary = HashMap::new();
 
 // insert
 contacts.insert("one", 1);
