@@ -34,6 +34,103 @@ var char: Character   = "A"
 /**
  * ---------------------------------------------------------------------------------
  * 
+ * @keywords
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+
+
+/**
+ * Keywords used in declarations: 
+ */
+
+// class
+// deinit
+// enum
+// extension
+// func
+// import
+// init
+// let
+// protocol
+// static
+// struct
+// subscript
+// typealias
+// var
+
+/**
+ * Keywords used in statements: 
+ */
+
+// break
+// case
+// continue 
+// default
+// do
+// else
+// fallthrough
+// if
+// in 
+// for
+// return 
+// switch
+// where
+// while
+
+/**
+ * Keywords used in expressions and types: 
+ */
+
+// as
+// dynamicType
+// is
+// new
+// super
+// self
+// Self
+// Type
+// __COLUMN__
+// __FILE__
+// __FUNCTION__
+// __LINE__
+
+/**
+ * Keywords reserved in particular contexts: 
+ */
+
+// associativity
+// didSet
+// get
+// infix
+// inout
+// left
+// mutating
+// none
+// nonmutating
+// operator
+// override
+// postfix
+// precedence
+// prefix
+// right
+// set
+// unowned
+// unowned(safe)
+// unowned(unsafe)
+// weak
+// willSet
+
+/**
+ * Outside the context in which they appear in the grammar, they can be used as identifiers.
+ */
+
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
  * @Mutability
  * 
  * ---------------------------------------------------------------------------------
@@ -62,14 +159,14 @@ foo = true
 /**
  * ---------------------------------------------------------------------------------
  * 
- * @conditionals
+ * @if-else conditionals
  * 
  * ---------------------------------------------------------------------------------
  */
 
 
 /**
- * if `CONDITION`{ 
+ * if `CONDITION` { 
  *      `STATEMENT(s)`
  * } else if `CONDITION` { 
  *      `STATEMENT(s)`
@@ -92,6 +189,37 @@ if (1 > 2 || 1 > 4) && true == true {
 
 // short hand
 (1 > 2 || 1 > 4) && true == true ? print("1 is greater than 2 or 4") : print("1 is less than 2")
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
+ * @switch conditionals
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+
+/**
+ * switch `CONDITION` { 
+ *     case `CASE`: {
+ *         `STATEMENT(s)`
+ *     }
+ * }
+ */
+
+
+/**
+ * @examples
+ */
+switch 0 {
+    case 0: {
+        print("0")
+    }
+    case 1: {
+        print("1")
+    }
+}
 
 
 /**
@@ -531,11 +659,11 @@ struct DeliveryRange {
 }
 
 // instantiate
-let range = DeliveryRange(range: 150, center: Location(coordinateString: "44.9871,-93.2758"))
+let ranger = DeliveryRange(range: 150, center: Location(coordinateString: "44.9871,-93.2758"))
 let customer = Location(coordinateString: "44.9850,-93.2750")
  
 // call method
-range.isInRange(customer) // => true!
+ranger.isInRange(customer) // => true!
 
 // the main difference between classes and structs is 
 // that structs are value types and classes are reference types.

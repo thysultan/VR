@@ -36,6 +36,22 @@ var bytes []byte      = ["H", "e", 'l', 'l', 'o']
 /**
  * ---------------------------------------------------------------------------------
  * 
+ * @keywords
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+
+// break        default      func         interface    select
+// case         defer        go           map          struct
+// chan         else         goto         package      switch
+// const        fallthrough  if           range        type
+// continue     for          import       return       var
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
  * @Mutability
  * 
  * ---------------------------------------------------------------------------------
@@ -61,7 +77,7 @@ foo = 1
 /**
  * ---------------------------------------------------------------------------------
  * 
- * @conditionals
+ * @if-else conditionals
  * 
  * ---------------------------------------------------------------------------------
  */
@@ -89,6 +105,37 @@ if ((1 > 2 || 1 > 4) && true == true) {
 	// you cannot use it without first importing it. import ("fmt")
 } else {
 	fmt.Println('1 is less than 2')
+}
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
+ * @switch conditionals
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+
+/**
+ * switch `CONDITION` { 
+ *     case `CASE`: {
+ *         `STATEMENT(s)`
+ *     }
+ * }
+ */
+
+
+/**
+ * @examples
+ */
+switch 0 {
+    case 0: {
+        print("0")
+    }
+    case 1: {
+        print("1")
+    }
 }
 
 
@@ -378,3 +425,53 @@ fmt.Println(pizzaRange.center.latitude) // => 44.9871
 pizzaRange.range = 250
 
 // ...
+
+// golang does not have classes. however, you can define methods on types.
+// a method is a function with a special receiver argument.
+// the receiver appears in its own argument list between the func keyword and the method name.
+
+// we import the math package because we are going to use pow and sqrt
+import "math"
+
+type DeliveryRange struct {
+	range float64
+	center Location
+}
+
+// (this DeliveryRange) is the receiver
+func (this DeliveryRange) isInRange(customer: Location) bool {
+	var difference float64 = Sqrt(Pow((this.customer.latitude - this.center.latitude), 2) +
+		Pow((this.customer.longitude - this.center.longitude), 2))
+
+	return difference < this.range
+}
+
+// instantiate
+var ranger DeliveryRange = DeliveryRange(150, Location("44.9871,-93.2758"))
+var customer Location = Location(coordinateString: "44.9850,-93.2750")
+ 
+// call method
+ranger.isInRange(customer) // => true!
+
+
+// you could also declare methods with pointer receivers.
+// which allows you to modify the value to which the receiver points
+
+/**
+ * @examples
+ */
+
+type Vertex struct {
+	X, Y float64
+}
+
+// cannot modify X and Y
+func (v Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+// can modify X and Y
+func (v *Vertex) Scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}

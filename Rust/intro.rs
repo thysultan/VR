@@ -41,10 +41,33 @@ let fc                 = fn() -> i32 { return 0; }; // ^ same thing
 /**
  * ---------------------------------------------------------------------------------
  * 
+ * @keywords
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+
+// abstract   alignof     as          become      box
+// break      const       continue    crate       do
+// else       enum        extern      false       final
+// fn         for         if          impl        in
+// let        loop        macro       match       mod
+// move       mut         offsetof    override    priv
+// proc       pub         pure        ref         return
+// Self       self        sizeof      stati`c     struct
+// super      trait       true        type        typeof
+// unsafe     unsized     use         virtual     where
+// while      yield    
+  
+  
+/**
+ * ---------------------------------------------------------------------------------
+ * 
  * @Mutability
  * 
  * ---------------------------------------------------------------------------------
  */
+
 
 // everything is immutable  but this can be overridden using the mut modifier.
 
@@ -64,14 +87,14 @@ foo = 2;
 /**
  * ---------------------------------------------------------------------------------
  * 
- * @conditionals
+ * @if-else conditionals
  * 
  * ---------------------------------------------------------------------------------
  */
 
 
 /**
- * if `CONDITION`{ 
+ * if `CONDITION` { 
  *      `STATEMENT(s)`
  * } else if `CONDITION` { 
  *      `STATEMENT(s)`
@@ -87,9 +110,40 @@ foo = 2;
 
   
 if (1 > 2 || 1 > 4) && true == true {
-	println!("1 is greater than 2 or 4");
+    println!("1 is greater than 2 or 4");
 } else {
 	println!("1 is less than 2");
+}
+
+
+/**
+ * ---------------------------------------------------------------------------------
+ * 
+ * @switch conditionals
+ * 
+ * ---------------------------------------------------------------------------------
+ */
+
+
+/**
+ * match `CONDITION` { 
+ *     `CASE` => {
+ *         `STATEMENT(s)`
+ *     }
+ * }
+ */
+
+
+/**
+ * @examples
+ */
+match 0 {
+    0 => {
+        println!("0");
+    }
+    1 => {
+        println!("1");
+    }
 }
 
 
@@ -466,8 +520,8 @@ impl DeliveryRange {
 }
 
 // instantiate
-let range: DeliveryRange = DeliveryRange(150, Location(44.9871, -93.2758));
+let ranger: DeliveryRange = DeliveryRange(150, Location(44.9871, -93.2758));
 let customer: Location = Location(44.9850, -93.2750);
  
 // call method
-range.isInRange(customer) // => true!
+ranger.isInRange(customer) // => true!
