@@ -180,8 +180,7 @@ func diffNewProps (newProps map[string]interface{}, oldProps map[string]interfac
 	var diff []interface{} = {}
 	var oldValue interface{} = oldProps[newName]
 
-	if newValue != nil && oldValue !== newValue) {
-		diff += ["setAttribute", newName, newValue, NS]
+	if newValue != nil && oldValue !== newValue {
 		diff = append(diff, []interface{}{"setAttribute", newName, newValue, NS}...)
 	}
 

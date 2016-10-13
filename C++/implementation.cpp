@@ -18,7 +18,7 @@ struct VNode {
 	vector<Any> children;
 };
 
-int reconciler (VNode newNode, VNode oldNode) {
+int reconciler (VNode newNode, VNode *oldNode) {
 	if (newNode.nodeType == 0) {
 		return 1;
 	}
@@ -53,11 +53,11 @@ int reconciler (VNode newNode, VNode oldNode) {
 
 		// if not text patch props
 		if (oldNode.nodeType == 1) {
-			patchProps(currentNode, oldNode);
+			patchProps(currentNode, &oldNode);
 		}
 
-		vector<VNode> currentChildren = currentNode.children;
-		vector<VNode> oldChildren = oldName.children;
+		vector<VNode> *currentChildren = currentNode.children;
+		vector<VNode> *oldChildren = oldNode.children;
 
 		int newLength = currentChildren.size();
 		int oldLength = oldChildren.size();
@@ -92,23 +92,35 @@ int reconciler (VNode newNode, VNode oldNode) {
 			    	switch (action) {
 			    		// remove operation
 			    		case 1: {
-			    			
+			    			// removeNode calls native api(s)
+			    			removeNode(oldNode, index)
+			    			oldchildren.erase(oldchildren.begin() + index);
+			    			// update deleteCount, increment
+			    			deleteCount = deleteCount + 1
 			    		}
 			    		// add operation
 			    		case 2: {
-			    			
+			    			// addNode calls native api(s)
+			    			addNode(oldNode, newChild, index);
+			    			oldChildren.insert(oldChildren.begin()+index, newChild);
+			    			// update deleteCount, decrement
+			    			deleteCount = deleteCount - 1;
 			    		}
 			    		// text operation
 			    		case 3: {
-			    			
+			    			// updateText calls native api(s)
+			    			updateText(newChild, oldChild);
+			    			oldChild.children[0] = newChild.children[0];
 			    		}
 			    		// replace operation
 			    		case 4: {
-			    			
+			    			// replaceNode calls native api(s)
+			    			replaceNode(newChild, oldChild);
+			    			oldchildren[index] = newChild;
 			    		}
 			    		// key operation
 			    		case 5: {
-			    			
+			    			// code block
 			    		}
 			    	}
 			    }
@@ -120,7 +132,7 @@ int reconciler (VNode newNode, VNode oldNode) {
 }
 
 
-void patchProps (VNode newNode, VNode oldNode) {
+void patchProps (VNode newNode, VNode *oldNode) {
 	vector<Any> diff = diffProps(newNode.props, oldNode.props)
 	int length = diff.size()
 
@@ -138,18 +150,48 @@ void patchProps (VNode newNode, VNode oldNode) {
 
 vector<Any> diffProps (unordered_map<string, Any> newProps, unordered_map<string, Any> oldProps) {
 	vector<Any> diff = {};
+	string NS = oldProps["xmlns"];
+
+	newProps<string, Any>::const_iterator newPropsIterator;
+    newPropsIterator = newProps.begin();
+
+    while (newPropsIterator != newProps.end()){
+		vector<Any> _diff = diffNewProps(newProps, oldProps, first, second, NS);
+		diff.insert(diff.end(), _diff.begin(), _diff.end());
+		++newPropsIterator;
+    }
+
+	oldProps<string, Any>::const_iterator oldPropsIterator;
+    oldPropsIterator = oldProps.begin();
+
+    while (oldPropsIterator != newProps.end()){
+		vector<Any> _diff = diffoldProps(newProps, oldProps, first, second, NS);
+		diff.insert(diff.end(), _diff.begin(), _diff.end());
+		++oldPropsIterator;
+    }
 
 	return diff;
 }
 
 vector<Any> diffNewProps (unordered_map<string, Any> newProps, unordered_map<string, Any> oldProps, string newName, Any newValue, string NS) {
 	vector<Any> diff = {};
+	Any oldValue = oldProps.count(newName) ? oldProps[newName] : NULL;
+
+	if (newValue != NULL && oldValue !== newValue) {
+		vector<Any> _diff = {"setAttribute", newName, newValue, NS};
+		diff.insert(diff.end(), _diff.begin(), _diff.end());
+	}
 
 	return diff;
 }
 
 vector<Any> diffOldProps (unordered_map<string, Any> newProps, unordered_map<string, Any> oldProps, string newName, Any newValue, string NS) {
 	vector<Any> diff = {};
+
+	if (newProps.count(oldName)) {
+		vector<Any> _diff = {"removeAttribute", oldName, oldValue, NS};
+		diff.insert(diff.end(), _diff.begin(), _diff.end());
+	}
 
 	return diff;
 }
