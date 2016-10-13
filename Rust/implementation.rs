@@ -73,6 +73,10 @@ fn reconciler (newNode: <VNode>, oldNode: <VNode>) -> i32 {
 				oldNode.children = currentNode.children;
 			}
 		} else {
+			// on remove and creation(add) actions
+			// we mutate the oldChildren's array
+			// we store the delete/add count in this variable
+			// to make sure we always have the right index on the next operation
 			let mut deleteCount: i32 = 0;
 
 			// initialization

@@ -72,6 +72,10 @@ function reconciler (newNode, oldNode) {
 				oldNode.children = currentChildren;
 			}
 		} else {
+			// on remove and creation(add) actions
+			// we mutate the oldChildren's array
+			// we store the delete/add count in this variable
+			// to make sure we always have the right index on the next operation
 			var deleteCount = 0;
 
 			for (var i = 0; i < newLength || i < oldLength; i = i + 1) {
