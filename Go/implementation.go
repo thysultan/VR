@@ -137,3 +137,76 @@ func reconciler (newNode VNode, oldNode VNode) int {
 
 	return 0
 }
+
+// patch props
+func patchProps (newNode VNode, oldNode VNode) {
+	var diff []interface{} = diffProps(newNode.props, oldNode.props)
+	var length int = len(diff)
+
+	if length != 0 {
+		for var i int = 0; i < length; i = i + 1 {
+			var prop = diff[i]
+
+			// patchProp calls native api(s)
+			patchProp(oldNode, prop[0], prop[1], prop[2], prop[3])
+		}
+
+		oldNode.props = newNode.props
+	}
+}
+
+// diff props
+func diffProps (newProps map[string]interface{}, oldProps map[string]interface{}) []interface{} {
+	var diff []interface = {}
+	var NS string = oldProps["xmlns"]
+
+	for newName, newValue := range newProps {
+		diff = append(diff, diffNewProps(newProps, oldProps, newName, newValue, NS)...)
+	}
+
+	for oldName, oldValue := range oldProps {
+	    diff = append(diff, diffoldProps(newProps, oldProps, oldName, oldValue, NS)...)
+	}
+
+	return diff
+}
+
+// diff new props
+func diffNewProps (newProps map[string]interface{}, oldProps map[string]interface{}, newName string, newValue interface{}, NS string) []interface {
+	var diff []interface{} = {}
+	var oldValue interface{}
+
+	// if the newProp's key is in oldProps assign oldValue to it
+	if oldProps[newName] != nil {
+	    oldValue = oldProps[newName]
+	} else {
+		oldValue = nil
+	}
+
+	if newValue != nil && oldValue !== newValue) {
+		diff += ["setAttribute", newName, newValue, NS]
+		diff = append(diff, []interface{}{"setAttribute", newName, newValue, NS}...)
+	}
+
+	return diff
+}
+
+// diff old props
+func diffOldProps (newProps map[string]interface{}, oldProps map[string]interface{}, oldName string, oldValue interface{}, NS string) []interface {
+	var diff []interface{} = {}
+
+	if newProps[oldName] == nil {
+		diff = append(diff, []interface{}{"removeAttribute", oldName, oldValue, NS}...)
+	}
+
+	return diff
+}
+
+
+// a text node
+var textNode Vnode = Node(3, "Text", map[string]interface{}{}, []interface{}{"Hello World"})
+// an element node NavBar with one single child TextNode
+var oldNode Vnode = Node(1, "NavBar", map[string]interface{}{"state": "active"}, []VNode{}{textNode})
+var newNode Vnode = Node(1, "NavBar", map[string]interface{}{"state": "active"}, []VNode{}{textNode})
+
+reconciler(newNode, oldNode)

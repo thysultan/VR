@@ -161,7 +161,7 @@ func diffProps (newProps: [String: Any], oldProps: [String: Any]) -> [Any] {
 }
 
 // diff new props
-func diffNewProps (newProps: [String: Any], oldProps: [String: Any], newName: String, newValue: String, NS: String) -> [Any] {
+func diffNewProps (newProps: [String: Any], oldProps: [String: Any], newName: String, newValue: Any, NS: String) -> [Any] {
 	var diff: [Any] = []
 	var oldValue: Any?
 
@@ -184,7 +184,7 @@ func diffOldProps (newProps: [String: Any], oldProps: [String: Any], oldName: St
 	var diff: [Any] = []
 
 	if newProps[oldName] == nil {
-		diff += ["removeAttribute", newName, newValue, NS]
+		diff += ["removeAttribute", oldName, oldValue, NS]
 	}
 
 	return diff
@@ -192,9 +192,9 @@ func diffOldProps (newProps: [String: Any], oldProps: [String: Any], oldName: St
 
 
 // a text node
-var textNode = Node(3, "Text", [:], ["Hello World"])
+var textNode: VNode = Node(3, "Text", [:], ["Hello World"])
 // an element node NavBar with one single child TextNode
-var oldNode = Node(1, "NavBar", ["state": "active"], [textNode])
-var newNode = Node(1, "NavBar", ["state": "active"], [textNode])
+var oldNode: VNode = Node(1, "NavBar", ["state": "active"], [textNode])
+var newNode: VNode = Node(1, "NavBar", ["state": "active"], [textNode])
 
 reconciler(newNode, oldNode)

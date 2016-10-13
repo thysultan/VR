@@ -192,7 +192,7 @@ fn diffProps (newProps: HashMap<&str, <Any>>, oldProps: HashMap<&str, <Any>>) ->
 }
 
 // diff new props
-func diffNewProps (newProps: HashMap<&str, <Any>>, oldProps: HashMap<&str, <Any>>, newName: &str, newValue: &str, NS: &str) -> Vec<Any> {
+func diffNewProps (newProps: HashMap<&str, <Any>>, oldProps: HashMap<&str, <Any>>, newName: &str, newValue: <Any>, NS: &str) -> Vec<Any> {
 	let mut diff: Vec<Any> = vec![];
 	let mut oldValue: <Any>;
 
@@ -215,7 +215,7 @@ fn diffOldProps (newProps: HashMap<&str, <Any>>, oldProps: HashMap<&str, <Any>>,
 
 	match newProps.get(oldName) {
 	    Node => {
-	    	diff.append(["removeAttribute", newName, newValue, NS]);
+	    	diff.append(["removeAttribute", oldName, oldValue, NS]);
 	    }
 	}
 
@@ -224,13 +224,13 @@ fn diffOldProps (newProps: HashMap<&str, <Any>>, oldProps: HashMap<&str, <Any>>,
 
 
 // a text node
-let mut textNode = Node(3, "Text", HashMap::new(), ["Hello World"]);
+let mut textNode: VNode = Node(3, "Text", HashMap::new(), ["Hello World"]);
 
-let props = HashMap::new();
+let props: HashMap<&str, <Any>> = HashMap::new();
 props.insert("state", "active");
 
 // an element node NavBar with one single child TextNode
-let mut oldNode = Node(1, "NavBar", props, [textNode]);
-let mut newNode = Node(1, "NavBar", props, [textNode]);
+let mut oldNode: VNode = Node(1, "NavBar", props, [textNode]);
+let mut newNode: VNode = Node(1, "NavBar", props, [textNode]);
 
 reconciler(newNode, oldNode);
