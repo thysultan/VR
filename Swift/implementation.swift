@@ -17,7 +17,7 @@ func Node (nodeType: Int, type: Any, props: [String: Any], children: [VNode]) ->
 var emptyNode: VNode = Node(0, "", [:], [])
 
 // diff and determine the least amount of actions to update the view
-func reconciler (newNode: VNode, oldNode: VNode) -> Int {
+func reconciler (newNode: VNode, inout oldNode: VNode) -> Int {
 	// remove
 	if newNode.nodeType == 0 {
 		return 1
@@ -53,7 +53,7 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 
 		// if not text patch props
 		if oldNode.nodeType == 1 {
-			patchProps(currentNode, oldNode)
+			patchProps(currentNode, &oldNode)
 		}
 
 		let currentChildren: [VNode] = currentNode.children
@@ -132,7 +132,7 @@ func reconciler (newNode: VNode, oldNode: VNode) -> Int {
 }
 
 // patch props
-func patchProps (newNode: VNode, oldNode: VNode) {
+func patchProps (newNode: VNode, inout oldNode: VNode) {
 	var diff: [Any] = diffProps(newNode.props, oldNode.props)
 	let length: Int = diff.count
 
@@ -201,4 +201,4 @@ var textNode: VNode = Node(3, "Text", [:], ["Hello World"])
 var oldNode: VNode = Node(1, "NavBar", ["state": "active"], [textNode])
 var newNode: VNode = Node(1, "NavBar", ["state": "active"], [textNode])
 
-reconciler(newNode, oldNode)
+reconciler(newNode, &oldNode)
